@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <defs>
+    <linearGradient id="enGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <!-- EN Shield Crest -->
+    <path d="M20 0 L36 8 L36 28 L20 40 L4 28 L4 8 Z" fill="#0F172A" stroke="url(#enGrad)" stroke-width="2.5"/>
+    <path d="M20 6 L30 12 L30 25 L20 33 L10 25 L10 12 Z" fill="url(#enGrad)" opacity="0.2"/>
+    <path d="M14 16 L26 16 M14 20 L22 20 M14 24 L26 24" stroke="url(#enGrad)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <text x="58" y="32" font-family="Rajdhani, Outfit, sans-serif" font-weight="800" font-size="20" fill="#FFFFFF" letter-spacing="3">EVERY NATION</text>
+  <text x="59" y="44" font-family="Rajdhani, Outfit, sans-serif" font-weight="600" font-size="10" fill="#94A3B8" letter-spacing="4">VAULT PROFILE</text>
+</svg>

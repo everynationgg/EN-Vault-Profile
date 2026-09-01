@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="violetBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="50%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#7E22CE"/>
+    </linearGradient>
+    <filter id="neonGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="8" result="blur1"/>
+      <feGaussianBlur stdDeviation="3" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="6" y="6" width="1188" height="663" rx="28" stroke="url(#violetBorder)" stroke-width="4" fill="none" filter="url(#neonGlow)"/>
+  <rect x="16" y="16" width="1168" height="643" rx="20" stroke="#9333EA" stroke-width="1.5" stroke-dasharray="8 6" stroke-opacity="0.6" fill="none"/>
+  
+  <!-- Cyber Violet Corner Conduits -->
+  <path d="M 10 70 L 10 36 A 26 26 0 0 1 36 10 L 70 10 L 80 20 L 30 20 L 20 30 L 20 80 Z" fill="#C084FC" opacity="0.9"/>
+  <path d="M 1190 70 L 1190 36 A 26 26 0 0 0 1164 10 L 1130 10 L 1120 20 L 1170 20 L 1180 30 L 1180 80 Z" fill="#C084FC" opacity="0.9"/>
+  <path d="M 10 605 L 10 639 A 26 26 0 0 0 36 665 L 70 665 L 80 655 L 30 655 L 20 645 L 20 595 Z" fill="#C084FC" opacity="0.9"/>
+  <path d="M 1190 605 L 1190 639 A 26 26 0 0 1 1164 665 L 1130 665 L 1120 655 L 1170 655 L 1180 645 L 1180 595 Z" fill="#C084FC" opacity="0.9"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  <defs>
+    <linearGradient id="tArchon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FDE68A" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 10 38 L 230 38" stroke="url(#tArchon)" stroke-width="3"/>
+  <polygon points="120,30 128,38 120,46 112,38" fill="#FDE68A"/>
+</svg>

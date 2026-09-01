@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="emb60" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E879F9"/>
+      <stop offset="100%" stop-color="#9333EA"/>
+    </linearGradient>
+  </defs>
+  <polygon points="50,4 94,25 94,75 50,96 6,75 6,25" stroke="url(#emb60)" stroke-width="5" fill="#3B0764"/>
+  <!-- Electrum Reaper Scythe Cross -->
+  <path d="M30 20 Q50 35 70 20 L50 65 Z" fill="url(#emb60)"/>
+  <text x="50" y="80" font-family="Rajdhani, sans-serif" font-weight="800" font-size="18" fill="#F3E8FF" text-anchor="middle">60</text>
+</svg>

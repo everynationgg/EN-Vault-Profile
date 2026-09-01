@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  <defs>
+    <linearGradient id="tPioneer" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#38BDF8" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#38BDF8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 10 38 L 230 38" stroke="url(#tPioneer)" stroke-width="2"/>
+  <polygon points="120,34 125,38 120,42 115,38" fill="#38BDF8"/>
+  <polygon points="10,38 16,34 16,42" fill="#38BDF8"/>
+  <polygon points="230,38 224,34 224,42" fill="#38BDF8"/>
+</svg>

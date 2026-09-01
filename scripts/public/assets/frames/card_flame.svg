@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="flameBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="30%" stop-color="#F59E0B"/>
+      <stop offset="70%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="solarGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="6" y="6" width="1188" height="663" rx="28" stroke="url(#flameBorder)" stroke-width="4.5" fill="none" filter="url(#solarGlow)"/>
+  <rect x="15" y="15" width="1170" height="645" rx="20" stroke="#F59E0B" stroke-width="1.5" stroke-opacity="0.5" fill="none"/>
+  
+  <!-- Solar Crest Points -->
+  <polygon points="600,4 620,16 580,16" fill="#FDE68A"/>
+  <polygon points="600,671 620,659 580,659" fill="#FDE68A"/>
+  <polygon points="4,337.5 16,317.5 16,357.5" fill="#FDE68A"/>
+  <polygon points="1196,337.5 1184,317.5 1184,357.5" fill="#FDE68A"/>
+  
+  <circle cx="34" cy="34" r="6" fill="#F59E0B"/>
+  <circle cx="1166" cy="34" r="6" fill="#F59E0B"/>
+  <circle cx="34" cy="641" r="6" fill="#F59E0B"/>
+  <circle cx="1166" cy="641" r="6" fill="#F59E0B"/>
+</svg>

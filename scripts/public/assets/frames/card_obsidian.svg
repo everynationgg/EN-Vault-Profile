@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="obsidianGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="50%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="1188" height="663" rx="28" stroke="url(#obsidianGrad)" stroke-width="5" fill="none"/>
+  <path d="M 6 120 L 30 90 L 30 30 L 90 30 L 120 6" stroke="#F43F5E" stroke-width="3" fill="none"/>
+  <path d="M 1194 120 L 1170 90 L 1170 30 L 1110 30 L 1080 6" stroke="#F43F5E" stroke-width="3" fill="none"/>
+  <rect x="18" y="18" width="1164" height="639" rx="18" stroke="#334155" stroke-width="1.5" fill="none"/>
+</svg>

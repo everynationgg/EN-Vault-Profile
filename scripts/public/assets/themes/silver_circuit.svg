@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <pattern id="silverGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#334155" stroke-width="0.75" stroke-opacity="0.35"/>
+      <circle cx="60" cy="0" r="1.5" fill="#475569" fill-opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#silverGrid)"/>
+  <!-- Circuit Traces -->
+  <path d="M 200 675 L 350 525 L 600 525 L 650 475 L 900 475 L 1050 325" stroke="#475569" stroke-width="2" stroke-opacity="0.3" fill="none"/>
+  <path d="M 100 0 L 250 150 L 500 150 L 550 200 L 800 200 L 950 350" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.25" fill="none"/>
+</svg>

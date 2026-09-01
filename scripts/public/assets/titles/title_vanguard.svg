@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  <defs>
+    <linearGradient id="tVanguard" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C084FC" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#A855F7" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#C084FC" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 20 38 L 220 38" stroke="url(#tVanguard)" stroke-width="2.5"/>
+  <polygon points="30,34 40,38 30,42" fill="#C084FC"/>
+  <polygon points="210,34 200,38 210,42" fill="#C084FC"/>
+</svg>

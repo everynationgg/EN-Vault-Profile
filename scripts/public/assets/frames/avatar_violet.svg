@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="avViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E879F9"/>
+      <stop offset="50%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#7E22CE"/>
+    </linearGradient>
+    <filter id="avVGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <circle cx="80" cy="80" r="74" stroke="url(#avViolet)" stroke-width="5" fill="none" filter="url(#avVGlow)"/>
+  <!-- Lightning Prongs -->
+  <polygon points="80,0 86,14 74,14" fill="#E879F9"/>
+  <polygon points="80,160 86,146 74,146" fill="#E879F9"/>
+  <polygon points="0,80 14,74 14,86" fill="#E879F9"/>
+  <polygon points="160,80 146,74 146,86" fill="#E879F9"/>
+</svg>

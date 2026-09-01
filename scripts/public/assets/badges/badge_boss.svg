@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="bgBoss" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+  </defs>
+  <circle cx="40" cy="40" r="38" fill="#1C1917" stroke="url(#bgBoss)" stroke-width="3"/>
+  <!-- Skull Icon -->
+  <path d="M40 18 C30 18 24 24 24 34 C24 42 28 46 32 48 L32 56 L48 56 L48 48 C52 46 56 42 56 34 C56 24 50 18 40 18 Z" fill="url(#bgBoss)"/>
+  <circle cx="34" cy="34" r="3.5" fill="#1C1917"/>
+  <circle cx="46" cy="34" r="3.5" fill="#1C1917"/>
+  <rect x="36" y="50" width="2.5" height="6" fill="#1C1917"/>
+  <rect x="41.5" y="50" width="2.5" height="6" fill="#1C1917"/>
+</svg>

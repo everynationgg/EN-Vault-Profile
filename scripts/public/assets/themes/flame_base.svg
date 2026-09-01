@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <radialGradient id="flameBaseGrad" cx="50%" cy="80%" r="80%">
+      <stop offset="0%" stop-color="#451A03"/>
+      <stop offset="45%" stop-color="#1C1917"/>
+      <stop offset="100%" stop-color="#0C0A09"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#flameBaseGrad)"/>
+</svg>

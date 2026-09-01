@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  <defs>
+    <linearGradient id="tRaider" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#E11D48" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F43F5E" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 15 38 L 225 38" stroke="url(#tRaider)" stroke-width="2"/>
+  <polygon points="120,32 126,38 120,44 114,38" fill="#F43F5E"/>
+</svg>

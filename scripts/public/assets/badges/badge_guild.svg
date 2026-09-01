@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="bgTrophy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="#1C1917" stroke="url(#bgTrophy)" stroke-width="3"/>
+  <!-- Trophy Cup -->
+  <path d="M26 22 L54 22 L50 42 C48 48 44 50 40 50 C36 50 32 48 30 42 Z" fill="url(#bgTrophy)"/>
+  <path d="M36 50 L44 50 L46 58 L34 58 Z" fill="url(#bgTrophy)"/>
+  <rect x="30" y="58" width="20" height="4" rx="1" fill="url(#bgTrophy)"/>
+  <path d="M26 26 C20 26 18 32 20 36 C22 40 26 40 28 40" stroke="url(#bgTrophy)" stroke-width="2" fill="none"/>
+  <path d="M54 26 C60 26 62 32 60 36 C58 40 54 40 52 40" stroke="url(#bgTrophy)" stroke-width="2" fill="none"/>
+</svg>

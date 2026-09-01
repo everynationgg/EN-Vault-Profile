@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" fill="none">
+  <defs>
+    <linearGradient id="tSov" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#FDE68A" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#C084FC" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 5 38 L 235 38" stroke="url(#tSov)" stroke-width="3.5"/>
+  <polygon points="120,28 130,38 120,48 110,38" fill="#FFFFFF"/>
+</svg>

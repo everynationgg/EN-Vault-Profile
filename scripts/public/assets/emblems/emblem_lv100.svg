@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="emb100" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FDE68A"/>
+      <stop offset="70%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+    <filter id="cstGlow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <polygon points="50,2 98,24 98,76 50,98 2,76 2,24" stroke="url(#emb100)" stroke-width="6" fill="#0A0817" filter="url(#cstGlow)"/>
+  <!-- Sovereign Star -->
+  <polygon points="50,10 60,35 85,38 65,54 72,78 50,64 28,78 35,54 15,38 40,35" fill="url(#emb100)"/>
+  <text x="50" y="85" font-family="Rajdhani, sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">100</text>
+</svg>

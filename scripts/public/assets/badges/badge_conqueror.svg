@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="bgZap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+  <circle cx="40" cy="40" r="38" fill="#0B1329" stroke="url(#bgZap)" stroke-width="3"/>
+  <!-- Lightning Bolt -->
+  <polygon points="44,14 26,40 38,40 34,66 54,36 42,36" fill="url(#bgZap)"/>
+</svg>

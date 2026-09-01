@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="bgStreak" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="35%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+  <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="#1C1917" stroke="url(#bgStreak)" stroke-width="3"/>
+  <!-- Flame Core -->
+  <path d="M40 16 C40 16 52 30 52 44 C52 54 45 62 40 62 C35 62 28 54 28 44 C28 34 36 24 40 16 Z" fill="url(#bgStreak)"/>
+  <path d="M40 34 C40 34 46 42 46 48 C46 54 42 58 40 58 C38 58 34 54 34 48 C34 44 38 38 40 34 Z" fill="#FEF3C7"/>
+</svg>

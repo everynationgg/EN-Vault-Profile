@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="bgVault" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="#1C1917" stroke="url(#bgVault)" stroke-width="3"/>
+  <!-- Coin Stack -->
+  <ellipse cx="40" cy="32" rx="18" ry="7" fill="url(#bgVault)"/>
+  <path d="M22 32 C22 37 30 42 40 42 C50 42 58 37 58 32 L58 42 C58 47 50 52 40 52 C30 52 22 47 22 42 Z" fill="url(#bgVault)" opacity="0.8"/>
+  <path d="M22 42 C22 47 30 52 40 52 C50 52 58 47 58 42 L58 52 C58 57 50 62 40 62 C30 62 22 57 22 52 Z" fill="url(#bgVault)" opacity="0.6"/>
+</svg>
