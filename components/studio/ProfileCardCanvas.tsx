@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import { UserProfileState, HotspotZone } from "@/lib/types";
+import { UserProfileState } from "@/lib/types";
 import { calculateProgressionStats, getMilestoneEmblemForLevel } from "@/lib/progression";
 import { getAssetById } from "@/lib/assetsCatalog";
 
@@ -13,25 +13,25 @@ export interface ProfileCardCanvasRef {
 
 interface ProfileCardCanvasProps {
   profile: UserProfileState;
-  activeHotspot?: HotspotZone | null;
-  onHotspotClick?: (zone: HotspotZone) => void;
-  isStudioMode?: boolean;
 }
 
 export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCanvasProps>(
-  ({ profile, activeHotspot, onHotspotClick, isStudioMode = false }, ref) => {
+  ({ profile }, ref) => {
     const svgRef = useRef<SVGSVGElement | null>(null);
 
     const stats = calculateProgressionStats(profile.profileExp);
-    const activeMilestone = getMilestoneEmblemForLevel(stats.level);
+    const activeMilestone = getMilestoneEmblemForLevel(profile.profileLevel || stats.level);
 
     // Resolve equipped assets
     const cardFrameAsset = getAssetById(profile.equipped.cardFrameId);
     const avatarFrameAsset = getAssetById(profile.equipped.avatarFrameId);
     const titleAsset = getAssetById(profile.equipped.titleId);
-    const titleText = (titleAsset?.metadata?.title_text as string) || titleAsset?.name || "VAULT PIONEER";
+    const titleText = (titleAsset?.metadata?.title_text as string) || titleAsset?.name || "Vault Seeker";
 
-    const avatarUrl = profile.customAvatarUrl || profile.discordAvatarUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80";
+    const avatarUrl =
+      profile.customAvatarUrl ||
+      profile.discordAvatarUrl ||
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80";
 
     // Expose export helpers
     useImperativeHandle(ref, () => ({
@@ -76,7 +76,7 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
     }));
 
     return (
-      <div className={`profile-card-wrapper ${isStudioMode ? "in-studio" : ""}`}>
+      <div className="profile-card-wrapper">
         <svg
           ref={svgRef}
           viewBox="0 0 1200 675"
@@ -86,20 +86,20 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
           xmlnsXlink="http://www.w3.org/1999/xlink"
           style={{
             display: "block",
-            borderRadius: "28px",
+            borderRadius: "24px",
             overflow: "hidden",
-            background: "#090B10",
+            background: "#07040D",
           }}
         >
           <defs>
-            {/* Base Card Clip Path */}
+            {/* Card Silhouette Clip Path */}
             <clipPath id="cardClip">
-              <rect x="0" y="0" width="1200" height="675" rx="28" />
+              <rect x="0" y="0" width="1200" height="675" rx="24" />
             </clipPath>
 
             {/* Avatar Circular Clip */}
             <clipPath id="avatarClip">
-              <circle cx="170" cy="225" r="74" />
+              <circle cx="210" cy="245" r="95" />
             </clipPath>
 
             {/* Glow Filters */}
@@ -109,7 +109,7 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             </filter>
 
             <filter id="emblemGlow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="10" result="blur" />
+              <feGaussianBlur stdDeviation="12" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
 
@@ -119,21 +119,20 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             </filter>
 
             <linearGradient id="expBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#38BDF8" />
-              <stop offset="50%" stop-color="#818CF8" />
+              <stop offset="0%" stop-color="#8B5CF6" />
               <stop offset="100%" stop-color="#C084FC" />
             </linearGradient>
 
             <linearGradient id="glassCardOverlay" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05" />
-              <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.04" />
+              <stop offset="100%" stop-color="#000000" stop-opacity="0.25" />
             </linearGradient>
           </defs>
 
           {/* Group bounded by card clip */}
           <g clipPath="url(#cardClip)">
             {/* ==============================================================
-                1. MULTI-LAYER THEME BACKGROUND (Stackable Layers)
+                1. BACKGROUND THEME LAYERS
                 ============================================================== */}
             {profile.equipped.themeLayers.map((layerId, idx) => {
               const layerAsset = getAssetById(layerId);
@@ -151,34 +150,23 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
               );
             })}
 
-            {/* Ambient Glass Highlight */}
+            {/* Ambient Overlay */}
             <rect x="0" y="0" width="1200" height="675" fill="url(#glassCardOverlay)" pointerEvents="none" />
 
             {/* ==============================================================
-                2. BRANDING WATERMARK (Every Nation GG Logo)
+                2. AVATAR & AVATAR FRAME ZONE
                 ============================================================== */}
-            <g transform="translate(980, 36)" opacity="0.9">
-              <image href="/assets/branding/en_logo.svg" x="0" y="0" width="180" height="54" />
-            </g>
-
-            {/* ==============================================================
-                3. AVATAR & AVATAR FRAME ZONE
-                ============================================================== */}
-            <g
-              id="zone-avatar"
-              style={{ cursor: isStudioMode ? "pointer" : "default" }}
-              onClick={() => onHotspotClick && onHotspotClick("avatar")}
-            >
+            <g id="zone-avatar">
               {/* Avatar Background Shadow */}
-              <circle cx="170" cy="225" r="76" fill="#0F172A" />
+              <circle cx="210" cy="245" r="98" fill="#0B0914" />
 
-              {/* Avatar User Image */}
+              {/* Avatar User Photo */}
               <image
                 href={avatarUrl}
-                x="96"
-                y="151"
-                width="148"
-                height="148"
+                x="110"
+                y="145"
+                width="200"
+                height="200"
                 preserveAspectRatio="xMidYMid slice"
                 clipPath="url(#avatarClip)"
               />
@@ -187,349 +175,206 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
               {avatarFrameAsset && (
                 <image
                   href={avatarFrameAsset.asset_url}
-                  x="90"
-                  y="145"
-                  width="160"
-                  height="160"
+                  x="100"
+                  y="135"
+                  width="220"
+                  height="220"
                   preserveAspectRatio="xMidYMid meet"
                 />
               )}
             </g>
 
             {/* ==============================================================
-                4. DISPLAY NAME, TITLE & IDENTITY ZONE
+                3. DISPLAY NAME & TITLE PILL
                 ============================================================== */}
-            <g
-              id="zone-name"
-              transform="translate(280, 160)"
-              style={{ cursor: isStudioMode ? "pointer" : "default" }}
-              onClick={() => onHotspotClick && onHotspotClick("name")}
-            >
+            <g id="zone-identity" transform="translate(380, 150)">
               {/* Custom Display Name */}
               <text
                 x="0"
-                y="50"
+                y="55"
                 fontFamily={profile.equipped.nameFont || "Rajdhani"}
                 fontWeight="800"
-                fontSize="48"
-                fill={profile.equipped.nameColor || "#F8FAFC"}
+                fontSize="52"
+                fill={profile.equipped.nameColor || "#FFFFFF"}
                 letterSpacing="1.5"
                 filter="url(#nameGlow)"
               >
-                {profile.discordDisplayName || profile.discordUsername}
+                {profile.discordDisplayName || "EnGG"}
               </text>
 
-              {/* Discord Username Handle */}
-              <text
-                x="0"
-                y="82"
-                fontFamily="Inter, sans-serif"
-                fontWeight="500"
-                fontSize="18"
-                fill="#94A3B8"
-                letterSpacing="0.5"
-              >
-                @{profile.discordUsername}
-              </text>
-            </g>
-
-            {/* Title & Title Frame Zone */}
-            <g
-              id="zone-title"
-              transform="translate(280, 260)"
-              style={{ cursor: isStudioMode ? "pointer" : "default" }}
-              onClick={() => onHotspotClick && onHotspotClick("title")}
-            >
-              {/* Title Badge Container */}
-              <rect
-                x="0"
-                y="0"
-                width="280"
-                height="38"
-                rx="8"
-                fill="rgba(15, 23, 42, 0.75)"
-                stroke={profile.equipped.titleColor || "#38BDF8"}
-                strokeWidth="1.5"
-              />
-              <text
-                x="140"
-                y="24"
-                fontFamily="Rajdhani, Orbitron, sans-serif"
-                fontWeight="700"
-                fontSize="16"
-                fill="#FFFFFF"
-                letterSpacing="2.5"
-                textAnchor="middle"
-              >
-                {titleText}
-              </text>
-
-              {/* Title Decorative Frame SVG */}
-              {titleAsset && (
-                <image
-                  href={titleAsset.asset_url}
-                  x="20"
-                  y="2"
-                  width="240"
+              {/* Honorary Title Pill */}
+              <g transform="translate(0, 75)">
+                <rect
+                  x="0"
+                  y="0"
+                  width="180"
                   height="34"
-                  preserveAspectRatio="xMidYMid meet"
-                  style={{ filter: `drop-shadow(0 0 8px ${profile.equipped.titleColor || "#38BDF8"})` }}
+                  rx="8"
+                  fill="rgba(24, 16, 42, 0.85)"
+                  stroke={profile.equipped.titleColor || "#8B5CF6"}
+                  strokeWidth="1.5"
                 />
-              )}
+                <text
+                  x="90"
+                  y="22"
+                  fontFamily="Rajdhani, sans-serif"
+                  fontWeight="700"
+                  fontSize="15"
+                  fill="#FFFFFF"
+                  letterSpacing="1.5"
+                  textAnchor="middle"
+                >
+                  {titleText}
+                </text>
+              </g>
             </g>
 
             {/* ==============================================================
-                5. MAIN MILESTONE EMBLEM ZONE (Determined by Level)
+                4. MAIN MILESTONE EMBLEM ZONE
                 ============================================================== */}
-            <g
-              id="zone-emblem"
-              transform="translate(740, 140)"
-              style={{ cursor: isStudioMode ? "pointer" : "default" }}
-              onClick={() => onHotspotClick && onHotspotClick("emblem")}
-            >
-              {/* Ambient Glow Disk */}
+            <g id="zone-emblem" transform="translate(860, 130)">
+              {/* Ambient Aura Glow Disk */}
               <circle
-                cx="80"
-                cy="80"
-                r="70"
+                cx="90"
+                cy="90"
+                r="80"
                 fill={profile.equipped.emblemColor || activeMilestone.color}
-                opacity="0.12"
+                opacity="0.15"
                 filter="url(#emblemGlow)"
               />
 
-              {/* Milestone SVG */}
+              {/* Milestone SVG Crest */}
               <image
                 href={activeMilestone.assetUrl}
-                x="10"
-                y="10"
-                width="140"
-                height="140"
+                x="15"
+                y="15"
+                width="150"
+                height="150"
                 preserveAspectRatio="xMidYMid meet"
                 style={{
-                  filter: `drop-shadow(0 0 12px ${profile.equipped.emblemColor || activeMilestone.color})`,
+                  filter: `drop-shadow(0 0 16px ${profile.equipped.emblemColor || activeMilestone.color})`,
                 }}
               />
-
-              {/* Milestone Subtext */}
-              <text
-                x="80"
-                y="170"
-                fontFamily="Rajdhani, sans-serif"
-                fontWeight="700"
-                fontSize="14"
-                fill="#94A3B8"
-                textAnchor="middle"
-                letterSpacing="2"
-              >
-                {activeMilestone.name.toUpperCase()}
-              </text>
             </g>
 
             {/* ==============================================================
-                6. VAULT COINS BADGE ZONE
+                5. LEVEL, EXP PROGRESS BAR & COINS
                 ============================================================== */}
-            <g
-              id="zone-coins"
-              transform="translate(940, 155)"
-              style={{ cursor: isStudioMode ? "pointer" : "default" }}
-              onClick={() => onHotspotClick && onHotspotClick("coins")}
-            >
-              <rect
-                x="0"
-                y="0"
-                width="180"
-                height="56"
-                rx="14"
-                fill="rgba(15, 23, 42, 0.85)"
-                stroke={profile.equipped.coinColor || "#F59E0B"}
-                strokeWidth="1.5"
-                style={{
-                  filter: `drop-shadow(0 0 10px ${profile.equipped.coinColor || "#F59E0B"}40)`,
-                }}
-              />
-              {/* Vault Coin Icon */}
-              <image
-                href="/assets/branding/vault_coin_icon.svg"
-                x="12"
-                y="10"
-                width="36"
-                height="36"
-              />
+            <g transform="translate(380, 310)">
+              {/* LEVEL Label */}
               <text
-                x="60"
-                y="26"
+                x="0"
+                y="14"
                 fontFamily="Inter, sans-serif"
-                fontWeight="600"
-                fontSize="11"
+                fontWeight="700"
+                fontSize="12"
                 fill="#94A3B8"
-                letterSpacing="1"
-              >
-                VAULT COINS
-              </text>
-              <text
-                x="60"
-                y="46"
-                fontFamily="Rajdhani, sans-serif"
-                fontWeight="800"
-                fontSize="22"
-                fill={profile.equipped.coinColor || "#F59E0B"}
-                letterSpacing="1"
-              >
-                {profile.vaultCoins.toLocaleString()}
-              </text>
-            </g>
-
-            {/* ==============================================================
-                7. LEVEL & EXP PROGRESSION BAR ZONE
-                ============================================================== */}
-            <g transform="translate(100, 360)">
-              {/* Level Badge Pill */}
-              <rect
-                x="0"
-                y="0"
-                width="110"
-                height="40"
-                rx="10"
-                fill="rgba(56, 189, 248, 0.15)"
-                stroke="#38BDF8"
-                strokeWidth="1.5"
-              />
-              <text
-                x="55"
-                y="26"
-                fontFamily="Rajdhani, sans-serif"
-                fontWeight="800"
-                fontSize="20"
-                fill="#FFFFFF"
-                textAnchor="middle"
                 letterSpacing="1.5"
               >
-                LV. {stats.level}
-              </text>
-
-              {/* EXP Numbers */}
-              <text
-                x="130"
-                y="26"
-                fontFamily="Inter, sans-serif"
-                fontWeight="600"
-                fontSize="15"
-                fill="#E2E8F0"
-                letterSpacing="0.5"
-              >
-                {profile.profileExp.toLocaleString()} EXP
+                LEVEL
               </text>
               <text
-                x="1000"
-                y="26"
-                fontFamily="Inter, sans-serif"
-                fontWeight="500"
-                fontSize="13"
-                fill="#94A3B8"
-                textAnchor="end"
+                x="0"
+                y="52"
+                fontFamily="var(--font-display)"
+                fontWeight="900"
+                fontSize="44"
+                fill="#FFFFFF"
+                letterSpacing="1"
               >
-                {stats.level >= 100
-                  ? "MAX LEVEL"
-                  : `${stats.expRemaining.toLocaleString()} EXP to Lv. ${stats.level + 1}`}
+                {profile.profileLevel || stats.level}
               </text>
 
               {/* Progress Bar Track */}
-              <rect x="0" y="52" width="1000" height="12" rx="6" fill="#1E293B" />
+              <rect x="75" y="24" width="280" height="12" rx="6" fill="#1E1B2E" />
               {/* Active Progress Fill */}
               <rect
-                x="0"
-                y="52"
-                width={Math.max(12, (1000 * stats.progressPercent) / 100)}
+                x="75"
+                y="24"
+                width={Math.max(12, (280 * stats.progressPercent) / 100)}
                 height="12"
                 rx="6"
                 fill="url(#expBarGrad)"
                 style={{
-                  filter: "drop-shadow(0 0 8px rgba(56, 189, 248, 0.5))",
+                  filter: "drop-shadow(0 0 8px #8B5CF6)",
                 }}
               />
+
+              {/* EXP Numbers */}
+              <text
+                x="355"
+                y="52"
+                fontFamily="Inter, sans-serif"
+                fontWeight="600"
+                fontSize="13"
+                fill="#94A3B8"
+                textAnchor="end"
+              >
+                {profile.profileExp.toLocaleString()} /{" "}
+                {stats.nextLevelExp.toLocaleString()} EXP
+              </text>
+
+              {/* Vault Coins Badge */}
+              <g transform="translate(470, 75)">
+                <image
+                  href="/assets/branding/vault_coin_icon.svg"
+                  x="0"
+                  y="0"
+                  width="28"
+                  height="28"
+                />
+                <text
+                  x="36"
+                  y="20"
+                  fontFamily="Rajdhani, sans-serif"
+                  fontWeight="800"
+                  fontSize="22"
+                  fill={profile.equipped.coinColor || "#F59E0B"}
+                  letterSpacing="1"
+                >
+                  {profile.vaultCoins.toLocaleString()}
+                </text>
+              </g>
             </g>
 
             {/* ==============================================================
-                8. 5 ACHIEVEMENT SHOWCASE BADGES ZONE
+                6. 5 ACHIEVEMENT SHOWCASE BADGES (Horizontal Bottom Row)
                 ============================================================== */}
-            <g
-              id="zone-achievements"
-              transform="translate(100, 480)"
-              style={{ cursor: isStudioMode ? "pointer" : "default" }}
-              onClick={() => onHotspotClick && onHotspotClick("achievements")}
-            >
-              {/* Showcase Container Bar */}
-              <rect
-                x="0"
-                y="0"
-                width="1000"
-                height="115"
-                rx="18"
-                fill="rgba(11, 15, 25, 0.75)"
-                stroke="rgba(255, 255, 255, 0.1)"
-                strokeWidth="1"
-              />
-
-              <text
-                x="24"
-                y="30"
-                fontFamily="Rajdhani, sans-serif"
-                fontWeight="700"
-                fontSize="13"
-                fill="#64748B"
-                letterSpacing="2"
-              >
-                ACHIEVEMENT SHOWCASE (5 SLOTS)
-              </text>
-
+            <g id="zone-achievements" transform="translate(80, 470)">
               {/* 5 Badges Array */}
-              {profile.equipped.achievementSlots.map((badgeId, idx) => {
+              {profile.equipped.achievementSlots.slice(0, 5).map((badgeId, idx) => {
                 const badgeAsset = getAssetById(badgeId);
-                const xOffset = 80 + idx * 190;
+                const xOffset = idx * 95;
                 return (
-                  <g key={`badge-slot-${badgeId}-${idx}`} transform={`translate(${xOffset}, 32)`}>
-                    {/* Outer Badge Rim */}
-                    <circle
-                      cx="36"
-                      cy="36"
-                      r="36"
-                      fill="#0F172A"
-                      stroke={badgeAsset ? "#38BDF8" : "#334155"}
+                  <g key={`badge-slot-${badgeId}-${idx}`} transform={`translate(${xOffset}, 0)`}>
+                    {/* Badge Container Frame */}
+                    <rect
+                      x="0"
+                      y="0"
+                      width="76"
+                      height="76"
+                      rx="16"
+                      fill="rgba(15, 12, 28, 0.75)"
+                      stroke={badgeAsset ? "rgba(139, 92, 246, 0.4)" : "rgba(255, 255, 255, 0.1)"}
                       strokeWidth="1.5"
-                      opacity="0.8"
                     />
 
                     {badgeAsset ? (
-                      <>
-                        <image
-                          href={badgeAsset.asset_url}
-                          x="4"
-                          y="4"
-                          width="64"
-                          height="64"
-                          preserveAspectRatio="xMidYMid meet"
-                          filter="url(#badgeGlow)"
-                        />
-                        <text
-                          x="36"
-                          y="78"
-                          fontFamily="Inter, sans-serif"
-                          fontWeight="600"
-                          fontSize="11"
-                          fill="#E2E8F0"
-                          textAnchor="middle"
-                        >
-                          {badgeAsset.name.length > 16
-                            ? badgeAsset.name.slice(0, 14) + "…"
-                            : badgeAsset.name}
-                        </text>
-                      </>
+                      <image
+                        href={badgeAsset.asset_url}
+                        x="10"
+                        y="10"
+                        width="56"
+                        height="56"
+                        preserveAspectRatio="xMidYMid meet"
+                        filter="url(#badgeGlow)"
+                      />
                     ) : (
                       <text
-                        x="36"
-                        y="42"
+                        x="38"
+                        y="46"
                         fontFamily="Inter, sans-serif"
-                        fontSize="18"
+                        fontSize="22"
                         fill="#475569"
                         textAnchor="middle"
                       >
@@ -542,7 +387,7 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             </g>
 
             {/* ==============================================================
-                9. OUTER CARD FRAME (1200 x 675 px)
+                7. OUTER CARD FRAME (1200 x 675 px)
                 ============================================================== */}
             {cardFrameAsset && (
               <image

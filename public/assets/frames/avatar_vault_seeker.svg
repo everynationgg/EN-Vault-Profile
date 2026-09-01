@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="avSeeker" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E879F9"/>
+      <stop offset="50%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#6B21A8"/>
+    </linearGradient>
+    <filter id="avGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Outer Ornate Ring -->
+  <circle cx="80" cy="80" r="74" stroke="url(#avSeeker)" stroke-width="5.5" fill="none" filter="url(#avGlow)"/>
+  <circle cx="80" cy="80" r="67" stroke="#C084FC" stroke-width="1.5" stroke-dasharray="10 5" fill="none"/>
+  <!-- Top Crest Diamond -->
+  <polygon points="80,0 89,14 80,24 71,14" fill="#E879F9"/>
+  <!-- Bottom Crest Gem -->
+  <polygon points="80,136 92,150 80,164 68,150" fill="#E879F9"/>
+  <circle cx="80" cy="150" r="3.5" fill="#FFFFFF"/>
+</svg>

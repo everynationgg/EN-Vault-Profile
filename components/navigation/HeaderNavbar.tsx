@@ -1,122 +1,185 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { UserProfileState } from "@/lib/types";
-import { DEMO_PROFILES } from "@/lib/assetsCatalog";
-import { calculateProgressionStats } from "@/lib/progression";
+import { DEMO_PROFILES, DEFAULT_EN_PROFILE } from "@/lib/assetsCatalog";
 import {
-  Palette,
-  Save,
-  Check,
+  Coins,
+  ChevronDown,
   Download,
   Users,
-  RotateCcw,
-  Eye,
-  EyeOff,
-  Maximize2,
-  Minimize2,
+  MessageSquare,
+  Sparkles,
 } from "lucide-react";
 
 interface HeaderNavbarProps {
   profile: UserProfileState;
-  isStudioMode: boolean;
-  onToggleStudioMode: () => void;
-  onSaveProfile: () => void;
-  isSaving: boolean;
-  saveSuccess: boolean;
   onOpenExport: () => void;
   onSwitchDemoProfile: (profileKey: keyof typeof DEMO_PROFILES) => void;
-  onResetToDefault: () => void;
-  showHotspots: boolean;
-  onToggleHotspots: () => void;
-  cardScale: "normal" | "compact";
-  onToggleCardScale: () => void;
 }
 
 export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
   profile,
-  isStudioMode,
-  onToggleStudioMode,
-  onSaveProfile,
-  isSaving,
-  saveSuccess,
   onOpenExport,
   onSwitchDemoProfile,
-  onResetToDefault,
-  showHotspots,
-  onToggleHotspots,
-  cardScale,
-  onToggleCardScale,
 }) => {
-  const stats = calculateProgressionStats(profile.profileExp);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<"profile" | "achievements">("profile");
 
   return (
     <header
-      className="glass-panel"
       style={{
         position: "sticky",
         top: 0,
         zIndex: 90,
         width: "100%",
-        padding: "10px 18px",
+        padding: "14px 28px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        flexWrap: "wrap",
-        gap: "10px",
+        background: "rgba(9, 11, 16, 0.85)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
       }}
     >
-      {/* Left: Branding */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <img
-          src="/assets/branding/en_logo.svg"
-          alt="Every Nation GG"
-          style={{ height: "30px", objectFit: "contain" }}
-        />
-        <span
-          className="badge-pill badge-cyan"
-          style={{ fontSize: "0.7rem", padding: "2px 8px" }}
+      {/* Left: Branding Lockup */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        {/* EN Shield Badge Icon */}
+        <div
+          style={{
+            width: "36px",
+            height: "36px",
+            borderRadius: "8px",
+            background: "linear-gradient(135deg, #7C3AED, #4F46E5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: 900,
+            fontSize: "0.9rem",
+            color: "#FFFFFF",
+            fontFamily: "var(--font-display)",
+            boxShadow: "0 0 15px rgba(124, 58, 237, 0.4)",
+          }}
         >
-          STUDIO
-        </span>
-      </div>
-
-      {/* Center: Live Stats (Level, EXP, Coins, Demo Switcher) */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          background: "rgba(11, 15, 25, 0.6)",
-          padding: "4px 12px",
-          borderRadius: "9999px",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          flexWrap: "wrap",
-        }}
-      >
-        {/* Level */}
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          EN
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <span
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "0.95rem",
+              fontSize: "1.1rem",
               fontWeight: 800,
-              color: "#38BDF8",
+              color: "#FFFFFF",
+              letterSpacing: "1px",
+              lineHeight: 1.1,
             }}
           >
-            LV. {stats.level}
+            EN VAULT
+          </span>
+          <span
+            style={{
+              fontSize: "0.65rem",
+              fontWeight: 700,
+              color: "#94A3B8",
+              letterSpacing: "2px",
+            }}
+          >
+            PROFILE
           </span>
         </div>
+      </div>
 
-        {/* Vault Coins Balance */}
+      {/* Center: Navigation Tabs */}
+      <nav
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "28px",
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => setActiveTab("profile")}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: activeTab === "profile" ? "#FFFFFF" : "#94A3B8",
+            fontFamily: "var(--font-display)",
+            fontSize: "0.95rem",
+            fontWeight: 800,
+            letterSpacing: "1.5px",
+            cursor: "pointer",
+            padding: "8px 4px",
+            position: "relative",
+            transition: "color 0.2s ease",
+          }}
+        >
+          PROFILE
+          {activeTab === "profile" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-14px",
+                left: 0,
+                right: 0,
+                height: "3px",
+                borderRadius: "2px",
+                background: "#8B5CF6",
+                boxShadow: "0 0 10px #8B5CF6",
+              }}
+            />
+          )}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("achievements")}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: activeTab === "achievements" ? "#FFFFFF" : "#64748B",
+            fontFamily: "var(--font-display)",
+            fontSize: "0.95rem",
+            fontWeight: 700,
+            letterSpacing: "1.5px",
+            cursor: "pointer",
+            padding: "8px 4px",
+            position: "relative",
+            transition: "color 0.2s ease",
+          }}
+        >
+          ACHIEVEMENTS
+          {activeTab === "achievements" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-14px",
+                left: 0,
+                right: 0,
+                height: "3px",
+                borderRadius: "2px",
+                background: "#8B5CF6",
+                boxShadow: "0 0 10px #8B5CF6",
+              }}
+            />
+          )}
+        </button>
+      </nav>
+
+      {/* Right: Vault Coins & User Dropdown */}
+      <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+        {/* Vault Coins Balance Pill */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "5px",
-            borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
-            paddingLeft: "10px",
+            gap: "7px",
+            background: "rgba(15, 23, 42, 0.7)",
+            padding: "6px 14px",
+            borderRadius: "9999px",
+            border: "1px solid rgba(245, 158, 11, 0.3)",
+            boxShadow: "0 0 12px rgba(245, 158, 11, 0.15)",
           }}
         >
           <img
@@ -128,7 +191,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "0.95rem",
-              fontWeight: 700,
+              fontWeight: 800,
               color: "#F59E0B",
             }}
           >
@@ -136,156 +199,155 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           </span>
         </div>
 
-        {/* Demo Switcher */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-            borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
-            paddingLeft: "10px",
-          }}
-        >
-          <Users size={13} color="#94A3B8" />
-          <select
-            onChange={(e) =>
-              onSwitchDemoProfile(e.target.value as keyof typeof DEMO_PROFILES)
-            }
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#CBD5E1",
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              outline: "none",
-            }}
-            defaultValue="veteran"
-          >
-            <option value="veteran" style={{ background: "#0B0F19" }}>
-              Veteran (Lv 30)
-            </option>
-            <option value="raider_violet" style={{ background: "#0B0F19" }}>
-              Raider (Lv 52)
-            </option>
-            <option value="mythic_sovereign" style={{ background: "#0B0F19" }}>
-              Sovereign (Lv 100)
-            </option>
-          </select>
-        </div>
-      </div>
-
-      {/* Right: Studio Toolbar & Actions */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          flexWrap: "wrap",
-        }}
-      >
-        {isStudioMode && (
-          <>
-            {/* Toggle Card Scale (Compact / Normal) */}
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={onToggleCardScale}
-              title={
-                cardScale === "compact"
-                  ? "Switch to Normal Size"
-                  : "Switch to Compact Mobile-Friendly Size"
-              }
-              style={{ padding: "6px 10px", fontSize: "0.8rem" }}
-            >
-              {cardScale === "compact" ? (
-                <Maximize2 size={14} />
-              ) : (
-                <Minimize2 size={14} />
-              )}
-              <span style={{ fontSize: "0.75rem" }}>
-                {cardScale === "compact" ? "Normal" : "Compact"}
-              </span>
-            </button>
-
-            {/* Toggle Hotspot Dots Visibility */}
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={onToggleHotspots}
-              title={showHotspots ? "Hide Hotspot Dots" : "Show Hotspot Dots"}
-              style={{
-                padding: "6px 10px",
-                fontSize: "0.8rem",
-                color: showHotspots ? "#38BDF8" : "#94A3B8",
-              }}
-            >
-              {showHotspots ? <Eye size={14} /> : <EyeOff size={14} />}
-              <span style={{ fontSize: "0.75rem" }}>
-                {showHotspots ? "Dots: On" : "Dots: Off"}
-              </span>
-            </button>
-          </>
-        )}
-
-        <button
-          type="button"
-          className="btn-secondary"
-          onClick={onOpenExport}
-          title="Export 1200x675 Card"
-          style={{ padding: "6px 12px" }}
-        >
-          <Download size={14} />
-          Export
-        </button>
-
-        {isStudioMode ? (
-          <>
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={onResetToDefault}
-              title="Reset configuration"
-              style={{ padding: "6px 10px" }}
-            >
-              <RotateCcw size={14} />
-            </button>
-            <button
-              type="button"
-              className="btn-primary"
-              onClick={onSaveProfile}
-              disabled={isSaving}
-              style={{
-                padding: "6px 14px",
-                background: saveSuccess
-                  ? "linear-gradient(135deg, #10B981, #059669)"
-                  : undefined,
-              }}
-            >
-              {saveSuccess ? (
-                <>
-                  <Check size={14} color="#FFFFFF" strokeWidth={3} />
-                  Saved
-                </>
-              ) : (
-                <>
-                  <Save size={14} />
-                  {isSaving ? "Saving..." : "Save"}
-                </>
-              )}
-            </button>
-          </>
-        ) : (
+        {/* User Avatar + Discord Dropdown */}
+        <div style={{ position: "relative" }}>
           <button
             type="button"
-            className="btn-primary"
-            onClick={onToggleStudioMode}
-            style={{ padding: "6px 14px" }}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "rgba(15, 23, 42, 0.7)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: "9999px",
+              padding: "4px 12px 4px 4px",
+              cursor: "pointer",
+            }}
           >
-            <Palette size={16} />
-            Customize Studio
+            <img
+              src={profile.discordAvatarUrl || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"}
+              alt="Avatar"
+              style={{
+                width: "28px",
+                height: "28px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+            <span
+              style={{
+                fontSize: "0.85rem",
+                fontWeight: 600,
+                color: "#F8FAFC",
+              }}
+            >
+              {profile.discordUsername || "EnGG#1234"}
+            </span>
+            <ChevronDown size={14} color="#94A3B8" />
           </button>
-        )}
+
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (
+            <div
+              className="glass-panel"
+              style={{
+                position: "absolute",
+                top: "calc(100% + 8px)",
+                right: 0,
+                width: "200px",
+                borderRadius: "12px",
+                padding: "8px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "4px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.8)",
+                zIndex: 100,
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  onOpenExport();
+                  setIsDropdownOpen(false);
+                }}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  padding: "8px 12px",
+                  fontSize: "0.8rem",
+                  border: "none",
+                }}
+              >
+                <Download size={14} />
+                Export 1200x675 PNG
+              </button>
+
+              <div
+                style={{
+                  height: "1px",
+                  background: "rgba(255, 255, 255, 0.1)",
+                  margin: "4px 0",
+                }}
+              />
+
+              <div
+                style={{
+                  padding: "4px 8px",
+                  fontSize: "0.7rem",
+                  color: "#64748B",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                }}
+              >
+                Switch Demo Profile
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  onSwitchDemoProfile("veteran");
+                  setIsDropdownOpen(false);
+                }}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  padding: "6px 12px",
+                  fontSize: "0.8rem",
+                  border: "none",
+                }}
+              >
+                EnGG (Lv 42)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  onSwitchDemoProfile("raider_violet");
+                  setIsDropdownOpen(false);
+                }}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  padding: "6px 12px",
+                  fontSize: "0.8rem",
+                  border: "none",
+                }}
+              >
+                Valkyrie (Lv 52)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  onSwitchDemoProfile("mythic_sovereign");
+                  setIsDropdownOpen(false);
+                }}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  padding: "6px 12px",
+                  fontSize: "0.8rem",
+                  border: "none",
+                }}
+              >
+                Sol Invictus (Lv 100)
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

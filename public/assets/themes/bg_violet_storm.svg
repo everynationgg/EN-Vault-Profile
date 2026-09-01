@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <radialGradient id="vStorm" cx="30%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#3B0764"/>
+      <stop offset="40%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#07040D"/>
+    </radialGradient>
+    <linearGradient id="vLtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E879F9"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#vStorm)"/>
+  <!-- Lightning Arcs Surrounding Avatar and Borders -->
+  <path d="M 0 150 L 140 220 L 90 280 L 180 340 L 100 420 L 220 480" stroke="url(#vLtGrad)" stroke-width="2.5" opacity="0.6" fill="none"/>
+  <path d="M 1200 180 L 1080 240 L 1120 310 L 1020 380 L 1100 460 L 980 520" stroke="url(#vLtGrad)" stroke-width="2.5" opacity="0.6" fill="none"/>
+  <circle cx="170" cy="225" r="130" fill="#A855F7" opacity="0.12"/>
+</svg>

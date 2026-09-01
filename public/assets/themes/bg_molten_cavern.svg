@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <radialGradient id="mCavern" cx="50%" cy="80%" r="85%">
+      <stop offset="0%" stop-color="#7C2D12"/>
+      <stop offset="40%" stop-color="#291409"/>
+      <stop offset="100%" stop-color="#080402"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#mCavern)"/>
+  <circle cx="200" cy="500" r="4" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="450" cy="420" r="5" fill="#EF4444" opacity="0.7"/>
+  <circle cx="850" cy="480" r="4.5" fill="#FBBF24" opacity="0.75"/>
+</svg>
