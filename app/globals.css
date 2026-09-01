@@ -166,15 +166,21 @@ body::before {
    ==================================================================== */
 .profile-page-grid {
   display: grid;
-  grid-template-columns: minmax(440px, 500px) 1fr;
-  gap: 24px;
+  grid-template-columns: minmax(460px, 520px) 1fr;
+  gap: 28px;
   align-items: start;
 }
 
 .left-profile-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  position: sticky;
+  top: 84px;
+  align-self: start;
+}
+
+.profile-card-container {
+  width: 100%;
 }
 
 .right-customizer-column {

@@ -95,16 +95,13 @@ export default function Home() {
         <div className="profile-page-grid">
           
           {/* ==============================================================
-              LEFT COLUMN: PROFILE CARD & PROFILE OVERVIEW
+              LEFT COLUMN: PROFILE CARD PREVIEW (Sticky live preview)
               ============================================================== */}
           <section className="left-profile-column">
             {/* Canonical 1200 x 675 Profile Card */}
-            <div style={{ width: "100%" }}>
+            <div className="profile-card-container">
               <ProfileCardCanvas ref={canvasRef} profile={profile} />
             </div>
-
-            {/* Profile Overview Card Underneath */}
-            <ProfileOverview profile={profile} />
           </section>
 
           {/* ==============================================================
