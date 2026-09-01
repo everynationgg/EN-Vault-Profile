@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import { UserProfileState, HotspotZone, EquippedCosmetics } from "@/lib/types";
 import { DEMO_PROFILES, STARTER_IDENTITIES } from "@/lib/assetsCatalog";
-import { calculateProgressionStats, EXP_SOURCES } from "@/lib/progression";
+import { calculateProgressionStats } from "@/lib/progression";
 import { ProfileCardCanvas, ProfileCardCanvasRef } from "@/components/studio/ProfileCardCanvas";
 import { StudioOverlay } from "@/components/studio/StudioOverlay";
 import { CosmeticDrawer } from "@/components/studio/CosmeticDrawer";
@@ -13,16 +13,14 @@ import {
   Palette,
   Sparkles,
   Download,
-  Share2,
   Shield,
   Zap,
-  Flame,
-  Swords,
   Compass,
   Brain,
-  CheckCircle2,
+  Swords,
   Layers,
-  ArrowRight,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import confetti from "canvas-confetti";
 
@@ -30,6 +28,8 @@ export default function Home() {
   const [profile, setProfile] = useState<UserProfileState>(DEMO_PROFILES.veteran);
   const [isStudioMode, setIsStudioMode] = useState<boolean>(false);
   const [activeHotspot, setActiveHotspot] = useState<HotspotZone>("avatar");
+  const [showHotspots, setShowHotspots] = useState<boolean>(true);
+  const [cardScale, setCardScale] = useState<"normal" | "compact">("compact");
   const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
@@ -89,8 +89,8 @@ export default function Home() {
     }));
 
     confetti({
-      particleCount: 50,
-      spread: 50,
+      particleCount: 40,
+      spread: 45,
       origin: { y: 0.7 },
       colors:
         identityKey === "violet"
@@ -118,8 +118,8 @@ export default function Home() {
       if (data.success) {
         setSaveSuccess(true);
         confetti({
-          particleCount: 70,
-          spread: 60,
+          particleCount: 60,
+          spread: 50,
           origin: { y: 0.5 },
           colors: ["#10B981", "#38BDF8", "#F59E0B"],
         });
@@ -132,6 +132,17 @@ export default function Home() {
     } finally {
       setIsSaving(false);
     }
+  };
+
+  // Calculate wrapper max width based on cardScale and mode
+  const getCardWrapperStyle = () => {
+    let maxWidth = "820px";
+    if (!isStudioMode) {
+      maxWidth = cardScale === "compact" ? "840px" : "960px";
+    } else {
+      maxWidth = cardScale === "compact" ? "740px" : "880px";
+    }
+    return { maxWidth };
   };
 
   return (
@@ -147,6 +158,12 @@ export default function Home() {
         onOpenExport={() => setIsExportModalOpen(true)}
         onSwitchDemoProfile={handleSwitchDemoProfile}
         onResetToDefault={handleResetToDefault}
+        showHotspots={showHotspots}
+        onToggleHotspots={() => setShowHotspots(!showHotspots)}
+        cardScale={cardScale}
+        onToggleCardScale={() =>
+          setCardScale(cardScale === "compact" ? "normal" : "compact")
+        }
       />
 
       {/* Main Studio Container */}
@@ -154,12 +171,12 @@ export default function Home() {
         style={{
           flex: 1,
           width: "100%",
-          maxWidth: "1300px",
+          maxWidth: "1200px",
           margin: "0 auto",
-          padding: "30px 20px 80px 20px",
+          padding: "16px 14px 60px 14px",
           display: "flex",
           flexDirection: "column",
-          gap: "28px",
+          gap: "20px",
           position: "relative",
           zIndex: 10,
         }}
@@ -172,49 +189,49 @@ export default function Home() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "12px",
-              paddingTop: "10px",
+              gap: "10px",
+              paddingTop: "6px",
             }}
           >
             <div
               className="badge-pill badge-cyan"
-              style={{ fontSize: "0.8rem", letterSpacing: "1.5px" }}
+              style={{ fontSize: "0.75rem", letterSpacing: "1px" }}
             >
-              <Sparkles size={14} />
-              CANONICAL 1200 × 675 DIGITAL IDENTITY STUDIO
+              <Sparkles size={13} />
+              1200 × 675 CANONICAL IDENTITY STUDIO
             </div>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2rem, 5vw, 3.2rem)",
+                fontSize: "clamp(1.6rem, 4vw, 2.6rem)",
                 fontWeight: 800,
-                letterSpacing: "1.5px",
-                lineHeight: 1.1,
+                letterSpacing: "1px",
+                lineHeight: 1.15,
                 background: "linear-gradient(135deg, #FFFFFF, #94A3B8, #38BDF8)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
             >
-              CUSTOMIZE YOUR EN IDENTITY CARD
+              EN PROFILE CUSTOMIZER
             </h1>
             <p
               style={{
-                maxWidth: "680px",
+                maxWidth: "600px",
                 color: "#94A3B8",
-                fontSize: "1rem",
-                lineHeight: 1.6,
+                fontSize: "0.9rem",
+                lineHeight: 1.5,
               }}
             >
-              Earn cosmetics, milestone emblems, and prestige titles through active
-              participation in Every Nation GG. Customize and export your 16:9 identity card.
+              Earn cosmetics, milestone emblems, and titles through active
+              participation in Every Nation GG.
             </p>
 
             {/* Quick Action Buttons */}
             <div
               style={{
                 display: "flex",
-                gap: "12px",
-                marginTop: "8px",
+                gap: "10px",
+                marginTop: "4px",
                 flexWrap: "wrap",
                 justifyContent: "center",
               }}
@@ -224,15 +241,15 @@ export default function Home() {
                 className="btn-primary"
                 onClick={() => setIsStudioMode(true)}
               >
-                <Palette size={18} />
-                Open Customizer Studio
+                <Palette size={16} />
+                Customize Card
               </button>
               <button
                 type="button"
                 className="btn-secondary"
                 onClick={() => setIsExportModalOpen(true)}
               >
-                <Download size={18} />
+                <Download size={16} />
                 Export 1200×675 PNG
               </button>
             </div>
@@ -240,9 +257,16 @@ export default function Home() {
         )}
 
         {/* ==============================================================
-            MASTER 1200 × 675 CARD CANVAS WRAPPER WITH HOTSPOTS
+            MASTER 1200 × 675 CARD CANVAS WRAPPER
             ============================================================== */}
-        <div style={{ position: "relative", width: "100%" }}>
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            margin: "0 auto",
+            ...getCardWrapperStyle(),
+          }}
+        >
           <ProfileCardCanvas
             ref={canvasRef}
             profile={profile}
@@ -254,11 +278,11 @@ export default function Home() {
             isStudioMode={isStudioMode}
           />
 
-          {/* Interactive Glowing Hotspot Dots */}
+          {/* Minimal Frosted Hotspot Callouts (Toggleable) */}
           <StudioOverlay
             activeHotspot={activeHotspot}
             onSelectHotspot={(zone) => setActiveHotspot(zone)}
-            isVisible={isStudioMode}
+            isVisible={isStudioMode && showHotspots}
           />
         </div>
 
@@ -279,47 +303,47 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "16px",
-              marginTop: "20px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "14px",
+              marginTop: "10px",
             }}
           >
             {/* Progression Card */}
-            <div className="glass-panel" style={{ borderRadius: "16px", padding: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                <Shield size={20} color="#38BDF8" />
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 700 }}>
-                  Dedicated 1–100 Progression
+            <div className="glass-panel" style={{ borderRadius: "14px", padding: "16px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                <Shield size={18} color="#38BDF8" />
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 700 }}>
+                  Level 1–100 Progression
                 </h3>
               </div>
-              <p style={{ fontSize: "0.85rem", color: "#94A3B8", lineHeight: 1.5 }}>
-                Level 30 represents ~1 year of consistent ENOS activity (83,429 EXP), while Level 100 is the 5-year master pinnacle (417,143 EXP).
+              <p style={{ fontSize: "0.8rem", color: "#94A3B8", lineHeight: 1.4 }}>
+                Level 30 represents ~1 year of activity (83,429 EXP), and Level 100 is the 5-year pinnacle (417,143 EXP).
               </p>
             </div>
 
             {/* Zero-Cost Static Artwork */}
-            <div className="glass-panel" style={{ borderRadius: "16px", padding: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                <Layers size={20} color="#A855F7" />
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 700 }}>
-                  Zero-Cost Edge CDN Assets
+            <div className="glass-panel" style={{ borderRadius: "14px", padding: "16px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                <Layers size={18} color="#A855F7" />
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 700 }}>
+                  Zero-Cost Edge CDN
                 </h3>
               </div>
-              <p style={{ fontSize: "0.85rem", color: "#94A3B8", lineHeight: 1.5 }}>
-                All high-resolution frames, multi-layer themes, and milestone emblems live in static vector format served via Vercel CDN with 0 KB Supabase storage costs.
+              <p style={{ fontSize: "0.8rem", color: "#94A3B8", lineHeight: 1.4 }}>
+                All frames, themes, and emblems live in static vector SVG format with 0 KB Supabase storage costs.
               </p>
             </div>
 
             {/* Live Client-Side Composition */}
-            <div className="glass-panel" style={{ borderRadius: "16px", padding: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                <Zap size={20} color="#F59E0B" />
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 700 }}>
-                  Real-Time Canvas Composition
+            <div className="glass-panel" style={{ borderRadius: "14px", padding: "16px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                <Zap size={18} color="#F59E0B" />
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 700 }}>
+                  Live Client Rendering
                 </h3>
               </div>
-              <p style={{ fontSize: "0.85rem", color: "#94A3B8", lineHeight: 1.5 }}>
-                Zero server-side image render lag on color tweaks or cosmetic switches. Live HTML5 canvas export generates lossless 1200×675 PNGs in seconds.
+              <p style={{ fontSize: "0.8rem", color: "#94A3B8", lineHeight: 1.4 }}>
+                Zero server-side image render lag. Export lossless 1200×675 PNGs directly in your browser.
               </p>
             </div>
           </div>
@@ -329,12 +353,11 @@ export default function Home() {
         <section
           className="glass-panel"
           style={{
-            borderRadius: "16px",
-            padding: "20px 24px",
-            marginTop: "10px",
+            borderRadius: "14px",
+            padding: "16px 18px",
             display: "flex",
             flexDirection: "column",
-            gap: "12px",
+            gap: "10px",
           }}
         >
           <div
@@ -343,16 +366,16 @@ export default function Home() {
               justifyContent: "space-between",
               alignItems: "center",
               flexWrap: "wrap",
-              gap: "10px",
+              gap: "8px",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Sparkles size={18} color="#38BDF8" />
+            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <Sparkles size={16} color="#38BDF8" />
               <span
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 700,
-                  fontSize: "0.95rem",
+                  fontSize: "0.85rem",
                   letterSpacing: "1px",
                   color: "#FFFFFF",
                   textTransform: "uppercase",
@@ -361,7 +384,7 @@ export default function Home() {
                 ENOS Activity EXP Rewards (Max 1,600 Profile EXP / week)
               </span>
             </div>
-            <span style={{ fontSize: "0.8rem", color: "#94A3B8" }}>
+            <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>
               Awarded automatically on ENOS Discord task completion
             </span>
           </div>
@@ -369,58 +392,58 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: "12px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "10px",
             }}
           >
             <div
               style={{
                 background: "rgba(15, 23, 42, 0.6)",
-                padding: "12px 14px",
-                borderRadius: "10px",
+                padding: "10px 12px",
+                borderRadius: "8px",
                 border: "1px solid rgba(56, 189, 248, 0.15)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#38BDF8", fontWeight: 700, fontSize: "0.9rem" }}>
-                <Compass size={16} />
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#38BDF8", fontWeight: 700, fontSize: "0.85rem" }}>
+                <Compass size={14} />
                 Daily Quest
               </div>
-              <div style={{ fontSize: "1.2rem", fontWeight: 800, color: "#FFFFFF", marginTop: "4px", fontFamily: "var(--font-display)" }}>
-                +50 EXP <span style={{ fontSize: "0.8rem", color: "#94A3B8", fontWeight: 500 }}>(Up to 3/day = 150 EXP)</span>
+              <div style={{ fontSize: "1.05rem", fontWeight: 800, color: "#FFFFFF", marginTop: "2px", fontFamily: "var(--font-display)" }}>
+                +50 EXP <span style={{ fontSize: "0.75rem", color: "#94A3B8", fontWeight: 500 }}>(Up to 3/day = 150 EXP)</span>
               </div>
             </div>
 
             <div
               style={{
                 background: "rgba(15, 23, 42, 0.6)",
-                padding: "12px 14px",
-                borderRadius: "10px",
+                padding: "10px 12px",
+                borderRadius: "8px",
                 border: "1px solid rgba(168, 85, 247, 0.15)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#C084FC", fontWeight: 700, fontSize: "0.9rem" }}>
-                <Brain size={16} />
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#C084FC", fontWeight: 700, fontSize: "0.85rem" }}>
+                <Brain size={14} />
                 Daily Trivia
               </div>
-              <div style={{ fontSize: "1.2rem", fontWeight: 800, color: "#FFFFFF", marginTop: "4px", fontFamily: "var(--font-display)" }}>
-                +25 EXP <span style={{ fontSize: "0.8rem", color: "#94A3B8", fontWeight: 500 }}>(1/day = 25 EXP)</span>
+              <div style={{ fontSize: "1.05rem", fontWeight: 800, color: "#FFFFFF", marginTop: "2px", fontFamily: "var(--font-display)" }}>
+                +25 EXP <span style={{ fontSize: "0.75rem", color: "#94A3B8", fontWeight: 500 }}>(1/day = 25 EXP)</span>
               </div>
             </div>
 
             <div
               style={{
                 background: "rgba(15, 23, 42, 0.6)",
-                padding: "12px 14px",
-                borderRadius: "10px",
+                padding: "10px 12px",
+                borderRadius: "8px",
                 border: "1px solid rgba(245, 158, 11, 0.15)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#F59E0B", fontWeight: 700, fontSize: "0.9rem" }}>
-                <Swords size={16} />
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#F59E0B", fontWeight: 700, fontSize: "0.85rem" }}>
+                <Swords size={14} />
                 Weekly World Boss
               </div>
-              <div style={{ fontSize: "1.2rem", fontWeight: 800, color: "#FFFFFF", marginTop: "4px", fontFamily: "var(--font-display)" }}>
-                +75 EXP <span style={{ fontSize: "0.8rem", color: "#94A3B8", fontWeight: 500 }}>/ AP spent (Max 5 AP = 375 EXP)</span>
+              <div style={{ fontSize: "1.05rem", fontWeight: 800, color: "#FFFFFF", marginTop: "2px", fontFamily: "var(--font-display)" }}>
+                +75 EXP <span style={{ fontSize: "0.75rem", color: "#94A3B8", fontWeight: 500 }}>/ AP (Max 5 AP = 375 EXP)</span>
               </div>
             </div>
           </div>

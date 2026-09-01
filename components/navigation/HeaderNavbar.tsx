@@ -8,12 +8,13 @@ import {
   Palette,
   Save,
   Check,
-  Coins,
-  ShieldAlert,
   Download,
   Users,
-  Eye,
   RotateCcw,
+  Eye,
+  EyeOff,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 
 interface HeaderNavbarProps {
@@ -26,6 +27,10 @@ interface HeaderNavbarProps {
   onOpenExport: () => void;
   onSwitchDemoProfile: (profileKey: keyof typeof DEMO_PROFILES) => void;
   onResetToDefault: () => void;
+  showHotspots: boolean;
+  onToggleHotspots: () => void;
+  cardScale: "normal" | "compact";
+  onToggleCardScale: () => void;
 }
 
 export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
@@ -38,6 +43,10 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
   onOpenExport,
   onSwitchDemoProfile,
   onResetToDefault,
+  showHotspots,
+  onToggleHotspots,
+  cardScale,
+  onToggleCardScale,
 }) => {
   const stats = calculateProgressionStats(profile.profileExp);
 
@@ -49,61 +58,54 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
         top: 0,
         zIndex: 90,
         width: "100%",
-        padding: "14px 28px",
+        padding: "10px 18px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: "10px",
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
       }}
     >
-      {/* Left: Branding & Tag */}
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      {/* Left: Branding */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <img
           src="/assets/branding/en_logo.svg"
           alt="Every Nation GG"
-          style={{ height: "36px", objectFit: "contain" }}
-        />
-        <div
-          style={{
-            height: "24px",
-            width: "1px",
-            background: "rgba(255, 255, 255, 0.15)",
-          }}
+          style={{ height: "30px", objectFit: "contain" }}
         />
         <span
           className="badge-pill badge-cyan"
-          style={{ fontSize: "0.75rem" }}
+          style={{ fontSize: "0.7rem", padding: "2px 8px" }}
         >
-          ENOS STUDIO
+          STUDIO
         </span>
       </div>
 
-      {/* Center: Live Stats (Level, EXP Bar, Coins) */}
+      {/* Center: Live Stats (Level, EXP, Coins, Demo Switcher) */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "20px",
+          gap: "12px",
           background: "rgba(11, 15, 25, 0.6)",
-          padding: "6px 18px",
+          padding: "4px 12px",
           borderRadius: "9999px",
           border: "1px solid rgba(255, 255, 255, 0.08)",
+          flexWrap: "wrap",
         }}
       >
-        {/* Level & Milestone */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        {/* Level */}
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
           <span
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "1.1rem",
+              fontSize: "0.95rem",
               fontWeight: 800,
               color: "#38BDF8",
             }}
           >
             LV. {stats.level}
-          </span>
-          <span style={{ fontSize: "0.8rem", color: "#94A3B8" }}>
-            ({profile.profileExp.toLocaleString()} EXP)
           </span>
         </div>
 
@@ -112,20 +114,20 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "6px",
+            gap: "5px",
             borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
-            paddingLeft: "14px",
+            paddingLeft: "10px",
           }}
         >
           <img
             src="/assets/branding/vault_coin_icon.svg"
             alt="Coins"
-            style={{ width: "18px", height: "18px" }}
+            style={{ width: "16px", height: "16px" }}
           />
           <span
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "1rem",
+              fontSize: "0.95rem",
               fontWeight: 700,
               color: "#F59E0B",
             }}
@@ -134,17 +136,17 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           </span>
         </div>
 
-        {/* Demo Switcher Dropdown */}
+        {/* Demo Switcher */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "6px",
+            gap: "4px",
             borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
-            paddingLeft: "14px",
+            paddingLeft: "10px",
           }}
         >
-          <Users size={14} color="#94A3B8" />
+          <Users size={13} color="#94A3B8" />
           <select
             onChange={(e) =>
               onSwitchDemoProfile(e.target.value as keyof typeof DEMO_PROFILES)
@@ -153,7 +155,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               background: "transparent",
               border: "none",
               color: "#CBD5E1",
-              fontSize: "0.8rem",
+              fontSize: "0.75rem",
               fontWeight: 600,
               cursor: "pointer",
               outline: "none",
@@ -161,28 +163,80 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             defaultValue="veteran"
           >
             <option value="veteran" style={{ background: "#0B0F19" }}>
-              Demo: Veteran (Lv 30)
+              Veteran (Lv 30)
             </option>
             <option value="raider_violet" style={{ background: "#0B0F19" }}>
-              Demo: Violet Raider (Lv 52)
+              Raider (Lv 52)
             </option>
             <option value="mythic_sovereign" style={{ background: "#0B0F19" }}>
-              Demo: Sovereign (Lv 100)
+              Sovereign (Lv 100)
             </option>
           </select>
         </div>
       </div>
 
-      {/* Right: Actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      {/* Right: Studio Toolbar & Actions */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          flexWrap: "wrap",
+        }}
+      >
+        {isStudioMode && (
+          <>
+            {/* Toggle Card Scale (Compact / Normal) */}
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={onToggleCardScale}
+              title={
+                cardScale === "compact"
+                  ? "Switch to Normal Size"
+                  : "Switch to Compact Mobile-Friendly Size"
+              }
+              style={{ padding: "6px 10px", fontSize: "0.8rem" }}
+            >
+              {cardScale === "compact" ? (
+                <Maximize2 size={14} />
+              ) : (
+                <Minimize2 size={14} />
+              )}
+              <span style={{ fontSize: "0.75rem" }}>
+                {cardScale === "compact" ? "Normal" : "Compact"}
+              </span>
+            </button>
+
+            {/* Toggle Hotspot Dots Visibility */}
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={onToggleHotspots}
+              title={showHotspots ? "Hide Hotspot Dots" : "Show Hotspot Dots"}
+              style={{
+                padding: "6px 10px",
+                fontSize: "0.8rem",
+                color: showHotspots ? "#38BDF8" : "#94A3B8",
+              }}
+            >
+              {showHotspots ? <Eye size={14} /> : <EyeOff size={14} />}
+              <span style={{ fontSize: "0.75rem" }}>
+                {showHotspots ? "Dots: On" : "Dots: Off"}
+              </span>
+            </button>
+          </>
+        )}
+
         <button
           type="button"
           className="btn-secondary"
           onClick={onOpenExport}
           title="Export 1200x675 Card"
+          style={{ padding: "6px 12px" }}
         >
-          <Download size={16} />
-          Export PNG
+          <Download size={14} />
+          Export
         </button>
 
         {isStudioMode ? (
@@ -192,8 +246,9 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               className="btn-secondary"
               onClick={onResetToDefault}
               title="Reset configuration"
+              style={{ padding: "6px 10px" }}
             >
-              <RotateCcw size={16} />
+              <RotateCcw size={14} />
             </button>
             <button
               type="button"
@@ -201,6 +256,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               onClick={onSaveProfile}
               disabled={isSaving}
               style={{
+                padding: "6px 14px",
                 background: saveSuccess
                   ? "linear-gradient(135deg, #10B981, #059669)"
                   : undefined,
@@ -208,13 +264,13 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             >
               {saveSuccess ? (
                 <>
-                  <Check size={16} color="#FFFFFF" strokeWidth={3} />
-                  Saved!
+                  <Check size={14} color="#FFFFFF" strokeWidth={3} />
+                  Saved
                 </>
               ) : (
                 <>
-                  <Save size={16} />
-                  {isSaving ? "Saving..." : "Save Config"}
+                  <Save size={14} />
+                  {isSaving ? "Saving..." : "Save"}
                 </>
               )}
             </button>
@@ -224,8 +280,9 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             type="button"
             className="btn-primary"
             onClick={onToggleStudioMode}
+            style={{ padding: "6px 14px" }}
           >
-            <Palette size={18} />
+            <Palette size={16} />
             Customize Studio
           </button>
         )}

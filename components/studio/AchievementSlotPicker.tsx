@@ -43,8 +43,8 @@ export const AchievementSlotPicker: React.FC<AchievementSlotPickerProps> = ({
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: "10px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(58px, 1fr))",
+            gap: "8px",
             marginTop: "8px",
           }}
         >

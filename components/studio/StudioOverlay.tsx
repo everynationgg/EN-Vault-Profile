@@ -109,16 +109,6 @@ export const StudioOverlay: React.FC<StudioOverlayProps> = ({
             }}
             title={spot.label}
           >
-            <span
-              style={{
-                fontSize: "12px",
-                fontWeight: "bold",
-                color: "#05070C",
-                lineHeight: 1,
-              }}
-            >
-              +
-            </span>
             <div className="hotspot-tooltip">
               <span style={{ color: "#38BDF8" }}>● </span>
               {spot.label}
