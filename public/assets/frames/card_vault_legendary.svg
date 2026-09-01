@@ -1,45 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
   <defs>
-    <linearGradient id="vltGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FDE68A"/>
-      <stop offset="40%" stop-color="#F59E0B"/>
-      <stop offset="70%" stop-color="#D97706"/>
+    <!-- Outer Gold Gradient -->
+    <linearGradient id="goldBevel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="25%" stop-color="#FCD34D"/>
+      <stop offset="60%" stop-color="#D97706"/>
       <stop offset="100%" stop-color="#78350F"/>
     </linearGradient>
-    <linearGradient id="vltPurpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+
+    <!-- Inner Violet Bevel -->
+    <linearGradient id="purpleBevel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5D0FE"/>
+      <stop offset="35%" stop-color="#C084FC"/>
+      <stop offset="70%" stop-color="#7E22CE"/>
+      <stop offset="100%" stop-color="#3B0764"/>
+    </linearGradient>
+
+    <!-- Crystal Shading -->
+    <linearGradient id="crystalFacetA" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#E879F9"/>
-      <stop offset="50%" stop-color="#A855F7"/>
       <stop offset="100%" stop-color="#6B21A8"/>
     </linearGradient>
-    <filter id="vaultGlow" x="-5%" y="-5%" width="110%" height="110%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <linearGradient id="crystalFacetB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+
+    <filter id="outerGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <!-- Outer Gold Border -->
-  <rect x="6" y="6" width="1188" height="663" rx="24" stroke="url(#vltGoldGrad)" stroke-width="4.5" fill="none" filter="url(#vaultGlow)"/>
-  <rect x="14" y="14" width="1172" height="647" rx="18" stroke="url(#vltPurpleGrad)" stroke-width="2.5" fill="none"/>
-  
-  <!-- Ornate Crystalline Corner Crystals (Top-Left) -->
-  <g transform="translate(0, 0)">
-    <polygon points="6,90 25,45 45,25 90,6 30,6 6,30" fill="url(#vltPurpleGrad)"/>
-    <polygon points="20,20 40,30 30,40" fill="#FDE68A"/>
-    <polygon points="4,40 18,18 40,4" stroke="#E879F9" stroke-width="2" fill="none"/>
+
+  <!-- Outer Beveled Gold & Purple Border -->
+  <rect x="8" y="8" width="1184" height="659" rx="20" stroke="url(#goldBevel)" stroke-width="5" fill="none" filter="url(#outerGlow)"/>
+  <rect x="16" y="16" width="1168" height="643" rx="14" stroke="url(#purpleBevel)" stroke-width="3" fill="none"/>
+  <rect x="22" y="22" width="1156" height="631" rx="10" stroke="rgba(192, 132, 252, 0.35)" stroke-width="1.5" fill="none"/>
+
+  <!-- TOP-LEFT 3D ORNATE CRYSTAL CORNER -->
+  <g transform="translate(0,0)">
+    <!-- Gold Wing Bracket -->
+    <polygon points="8,105 35,60 60,35 105,8 45,8 8,45" fill="url(#goldBevel)"/>
+    <!-- Outer Violet Facet -->
+    <polygon points="12,75 30,45 45,30 75,12 25,12 12,25" fill="url(#crystalFacetA)"/>
+    <!-- Center Crystal Gem Diamond -->
+    <polygon points="40,40 55,25 70,40 55,55" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 48,40" fill="#FFFFFF" opacity="0.6"/>
+    <!-- Inner Accent Diamond -->
+    <polygon points="20,20 32,12 40,24 28,32" fill="url(#crystalFacetB)"/>
   </g>
-  <!-- Top-Right -->
-  <g transform="translate(1200, 0) scale(-1, 1)">
-    <polygon points="6,90 25,45 45,25 90,6 30,6 6,30" fill="url(#vltPurpleGrad)"/>
-    <polygon points="20,20 40,30 30,40" fill="#FDE68A"/>
-    <polygon points="4,40 18,18 40,4" stroke="#E879F9" stroke-width="2" fill="none"/>
+
+  <!-- TOP-RIGHT 3D ORNATE CRYSTAL CORNER -->
+  <g transform="translate(1200,0) scale(-1, 1)">
+    <polygon points="8,105 35,60 60,35 105,8 45,8 8,45" fill="url(#goldBevel)"/>
+    <polygon points="12,75 30,45 45,30 75,12 25,12 12,25" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 70,40 55,55" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 48,40" fill="#FFFFFF" opacity="0.6"/>
+    <polygon points="20,20 32,12 40,24 28,32" fill="url(#crystalFacetB)"/>
   </g>
-  <!-- Bottom-Left -->
-  <g transform="translate(0, 675) scale(1, -1)">
-    <polygon points="6,90 25,45 45,25 90,6 30,6 6,30" fill="url(#vltGoldGrad)"/>
-    <polygon points="20,20 40,30 30,40" fill="#E879F9"/>
+
+  <!-- BOTTOM-LEFT 3D ORNATE CRYSTAL CORNER -->
+  <g transform="translate(0,675) scale(1, -1)">
+    <polygon points="8,105 35,60 60,35 105,8 45,8 8,45" fill="url(#goldBevel)"/>
+    <polygon points="12,75 30,45 45,30 75,12 25,12 12,25" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 70,40 55,55" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 48,40" fill="#FFFFFF" opacity="0.6"/>
+    <polygon points="20,20 32,12 40,24 28,32" fill="url(#crystalFacetB)"/>
   </g>
-  <!-- Bottom-Right -->
-  <g transform="translate(1200, 675) scale(-1, -1)">
-    <polygon points="6,90 25,45 45,25 90,6 30,6 6,30" fill="url(#vltGoldGrad)"/>
-    <polygon points="20,20 40,30 30,40" fill="#E879F9"/>
+
+  <!-- BOTTOM-RIGHT 3D ORNATE CRYSTAL CORNER -->
+  <g transform="translate(1200,675) scale(-1, -1)">
+    <polygon points="8,105 35,60 60,35 105,8 45,8 8,45" fill="url(#goldBevel)"/>
+    <polygon points="12,75 30,45 45,30 75,12 25,12 12,25" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 70,40 55,55" fill="url(#crystalFacetA)"/>
+    <polygon points="40,40 55,25 48,40" fill="#FFFFFF" opacity="0.6"/>
+    <polygon points="20,20 32,12 40,24 28,32" fill="url(#crystalFacetB)"/>
   </g>
 </svg>
