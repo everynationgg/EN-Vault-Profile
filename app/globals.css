@@ -370,18 +370,41 @@ body::before {
 }
 
 /* ====================================================================
-   MOBILE RESPONSIVENESS (< 1024px & < 640px)
+   MOBILE RESPONSIVENESS & PERFECT HORIZONTAL CENTERING (< 1024px & < 640px)
    ==================================================================== */
 @media (max-width: 1024px) {
   .profile-page-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     gap: 20px;
   }
 
   .left-profile-column {
-    max-width: 600px;
-    margin: 0 auto;
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .right-customizer-column {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .profile-card-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 16px;
   }
 
   .category-meta {
@@ -406,19 +429,55 @@ body::before {
 }
 
 @media (max-width: 640px) {
+  header {
+    padding: 10px 14px !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  header nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px !important;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  main {
+    padding: 14px 10px 50px 10px !important;
+  }
+
+  .profile-page-grid {
+    max-width: 100%;
+    gap: 16px;
+    margin: 0 auto;
+  }
+
+  .profile-card-wrapper {
+    border-radius: 12px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .profile-card-wrapper svg {
+    border-radius: 12px;
+  }
+
   .category-row {
-    padding: 10px;
+    padding: 10px 12px;
     gap: 10px;
   }
 
   .category-meta {
-    min-width: 110px;
-    max-width: 110px;
+    min-width: 105px;
+    max-width: 105px;
     gap: 6px;
   }
 
   .category-icon-box {
-    display: none; /* Hide icon box on super small screens to give max width to options */
+    display: none; /* Hide icon box on small mobile to maximize horizontal scroll area for options */
   }
 
   .category-title {
@@ -444,3 +503,5 @@ body::before {
     height: 38px;
   }
 }
+
+
