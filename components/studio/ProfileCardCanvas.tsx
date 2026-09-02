@@ -36,6 +36,13 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
     const titleText =
       (titleAsset?.metadata?.title_text as string) || titleAsset?.name || "VAULT SEEKER";
 
+    const discordTag = profile.discordUsername || "EnGG#1234";
+    const approxTagTextWidth = discordTag.length * 13;
+    const discordIconWidth = 24;
+    const discordIconGap = 8;
+    const totalTagWidth = discordIconWidth + discordIconGap + approxTagTextWidth;
+    const discordStartX = -totalTagWidth / 2;
+
     const avatarUrl =
       profile.customAvatarUrl ||
       profile.discordAvatarUrl ||
@@ -204,31 +211,32 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             </g>
 
             {/* ==============================================================
-                3. DISCORD DISPLAY NAME & USERNAME (Beside Avatar)
+                3. DISCORD DISPLAY NAME & USERNAME (Centered right below top frame design)
                 ============================================================== */}
-            <g id="zone-identity" transform="translate(435, 55)">
-              {/* Display Name */}
+            <g id="zone-identity" transform="translate(600, 72)">
+              {/* Display Name - Centered */}
               <text
                 x="0"
-                y="70"
+                y="55"
                 fontFamily={profile.equipped.nameFont || "Rajdhani, sans-serif"}
                 fontWeight="900"
-                fontSize="72"
+                fontSize="68"
                 fill={profile.equipped.nameColor || "#FFFFFF"}
                 letterSpacing="2"
+                textAnchor="middle"
                 filter="url(#nameGlow)"
               >
                 {profile.discordDisplayName || "EnGG"}
               </text>
 
-              {/* Discord Logo + Discord Username */}
-              <g transform="translate(0, 96)">
+              {/* Discord Logo + Discord Username - Centered */}
+              <g transform="translate(0, 80)">
                 {/* Discord Icon */}
                 <svg
-                  x="0"
+                  x={discordStartX}
                   y="0"
-                  width="28"
-                  height="28"
+                  width={discordIconWidth}
+                  height="24"
                   viewBox="0 0 127.14 96.36"
                   fill="#A855F7"
                 >
@@ -236,28 +244,28 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
                 </svg>
 
                 <text
-                  x="38"
-                  y="22"
+                  x={discordStartX + discordIconWidth + discordIconGap}
+                  y="19"
                   fontFamily="Inter, sans-serif"
                   fontWeight="700"
-                  fontSize="26"
+                  fontSize="22"
                   fill="#E2E8F0"
                   letterSpacing="0.5"
                 >
-                  {profile.discordUsername || "EnGG#1234"}
+                  {discordTag}
                 </text>
               </g>
             </g>
 
             {/* ==============================================================
-                4. ORNATE TITLE FRAME BANNER PLAQUE
+                4. ORNATE TITLE FRAME BANNER PLAQUE (Centered)
                 ============================================================== */}
             <g
               id="zone-title"
               transform={
                 titleAsset?.id === "title_mystic_cat"
-                  ? "translate(400, 195)"
-                  : "translate(435, 212)"
+                  ? "translate(340, 195)"
+                  : "translate(330, 205)"
               }
             >
               {/* Beveled Plaque Frame */}
