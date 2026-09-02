@@ -326,11 +326,11 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             {/* ==============================================================
                 6. LEVEL + EXP PROGRESS BAR & VAULT COINS (Middle Row)
                 ============================================================== */}
-            <g transform="translate(440, 320)">
+            <g transform="translate(420, 340)">
               {/* LEVEL Column */}
               <text
                 x="0"
-                y="14"
+                y="12"
                 fontFamily="Inter, sans-serif"
                 fontWeight="800"
                 fontSize="14"
@@ -341,75 +341,84 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
               </text>
               <text
                 x="0"
-                y="62"
+                y="68"
                 fontFamily="var(--font-display)"
                 fontWeight="900"
-                fontSize="50"
+                fontSize="68"
                 fill="#FFFFFF"
-                letterSpacing="1"
+                letterSpacing="1.5"
+                style={{
+                  filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.8))",
+                }}
               >
                 {profile.profileLevel || stats.level}
               </text>
 
               {/* Progress Bar Track & Fill */}
-              <rect x="95" y="32" width="250" height="14" rx="7" fill="#18102B" />
+              <rect x="110" y="34" width="230" height="16" rx="8" fill="#18102B" />
               <rect
-                x="95"
-                y="32"
-                width={Math.max(14, (250 * stats.progressPercent) / 100)}
-                height="14"
-                rx="7"
+                x="110"
+                y="34"
+                width={Math.max(16, (230 * stats.progressPercent) / 100)}
+                height="16"
+                rx="8"
                 fill="url(#expBarGrad)"
                 filter="url(#expBarGlow)"
               />
 
               {/* EXP Numbers */}
               <text
-                x="345"
-                y="65"
+                x="340"
+                y="70"
                 fontFamily="Inter, sans-serif"
-                fontWeight="600"
-                fontSize="13"
-                fill="#94A3B8"
+                fontWeight="700"
+                fontSize="16"
+                fill="#CBD5E1"
                 textAnchor="end"
+                style={{
+                  filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.8))",
+                }}
               >
                 {profile.profileExp.toLocaleString()} /{" "}
                 {stats.nextLevelExp.toLocaleString()} EXP
               </text>
 
               {/* VAULT COINS (Right of Level Row) */}
-              <g transform="translate(390, 0)">
+              <g transform="translate(385, -2)">
                 <text
-                  x="48"
+                  x="54"
                   y="14"
                   fontFamily="Inter, sans-serif"
                   fontWeight="800"
-                  fontSize="13"
+                  fontSize="14"
                   fill="#F59E0B"
-                  letterSpacing="1.5"
+                  letterSpacing="2"
                 >
                   VAULT COINS
                 </text>
 
                 {/* 3D Gold Star Coin Icon */}
-                <g transform="translate(0, 24)">
-                  <circle cx="20" cy="20" r="18" fill="url(#coinGoldGrad)" />
-                  <circle cx="20" cy="20" r="14" stroke="#FEF08A" strokeWidth="1.5" fill="#B45309" />
+                <g transform="translate(0, 20)">
+                  <circle cx="22" cy="22" r="21" fill="url(#coinGoldGrad)" />
+                  <circle cx="22" cy="22" r="16" stroke="#FEF08A" strokeWidth="1.5" fill="#B45309" />
                   <polygon
-                    points="20,10 23,17 30,18 25,23 26,30 20,26 14,30 15,23 10,18 17,17"
+                    points="22,11 25,18 33,20 27,25 28,33 22,29 16,33 17,25 11,20 19,18"
                     fill="#FEF08A"
                   />
                 </g>
 
                 {/* Coin Numbers */}
                 <text
-                  x="48"
-                  y="58"
+                  x="54"
+                  y="66"
                   fontFamily="var(--font-display)"
                   fontWeight="900"
-                  fontSize="34"
+                  fontSize="48"
                   fill={profile.equipped.coinColor || "#FFFFFF"}
-                  letterSpacing="1"
+                  letterSpacing="1.5"
+                  style={{
+                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.8))",
+                  }}
                 >
                   {profile.vaultCoins.toLocaleString()}
                 </text>
@@ -417,12 +426,12 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             </g>
 
             {/* ==============================================================
-                7. 5 LARGE ACHIEVEMENT SHOWCASE CARDS (Bottom Row)
+                7. 5 ACHIEVEMENT SHOWCASE CARDS (Centered to avoid corner frames)
                 ============================================================== */}
-            <g id="zone-achievements" transform="translate(70, 445)">
+            <g id="zone-achievements" transform="translate(212, 475)">
               {profile.equipped.achievementSlots.slice(0, 5).map((badgeId, idx) => {
                 const badgeAsset = getAssetById(badgeId);
-                const slotX = idx * 215; // 5 cards spaced across 1060px width
+                const slotX = idx * 158; // 5 cards (144px width + 14px gap) centered cleanly in 776px safe width
                 const badgeColor =
                   (badgeAsset?.metadata?.color as string) || "#C084FC";
 
@@ -432,9 +441,9 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
                     <rect
                       x="0"
                       y="0"
-                      width="196"
-                      height="180"
-                      rx="16"
+                      width="144"
+                      height="160"
+                      rx="14"
                       fill="url(#cardBadgeBg)"
                       stroke={badgeColor}
                       strokeWidth="1.5"
@@ -444,11 +453,11 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
 
                     {/* Inner Glass Highlight */}
                     <rect
-                      x="4"
-                      y="4"
-                      width="188"
-                      height="172"
-                      rx="12"
+                      x="3"
+                      y="3"
+                      width="138"
+                      height="154"
+                      rx="11"
                       stroke="rgba(255, 255, 255, 0.05)"
                       strokeWidth="1"
                       fill="none"
@@ -459,22 +468,22 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
                         {/* 3D Badge Artwork (Top) */}
                         <image
                           href={badgeAsset.asset_url}
-                          x="58"
-                          y="15"
-                          width="80"
-                          height="80"
+                          x="42"
+                          y="12"
+                          width="60"
+                          height="60"
                           preserveAspectRatio="xMidYMid meet"
                         />
 
                         {/* Badge Name (Middle) */}
                         <text
-                          x="98"
-                          y="118"
+                          x="72"
+                          y="95"
                           fontFamily="var(--font-display)"
                           fontWeight="800"
-                          fontSize="14"
+                          fontSize="12"
                           fill={badgeColor}
-                          letterSpacing="1"
+                          letterSpacing="0.8"
                           textAnchor="middle"
                         >
                           {badgeAsset.name.toUpperCase()}
@@ -482,21 +491,21 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
 
                         {/* Badge Criteria / Description (Bottom) */}
                         <text
-                          x="98"
-                          y="142"
+                          x="72"
+                          y="116"
                           fontFamily="Inter, sans-serif"
                           fontWeight="500"
-                          fontSize="11"
+                          fontSize="9.5"
                           fill="#94A3B8"
                           textAnchor="middle"
                         >
-                          {badgeAsset.description.length > 25 ? (
+                          {badgeAsset.description.length > 20 ? (
                             <>
-                              <tspan x="98" dy="0">
-                                {badgeAsset.description.slice(0, 24)}
+                              <tspan x="72" dy="0">
+                                {badgeAsset.description.slice(0, 18)}
                               </tspan>
-                              <tspan x="98" dy="14">
-                                {badgeAsset.description.slice(24)}
+                              <tspan x="72" dy="13">
+                                {badgeAsset.description.slice(18)}
                               </tspan>
                             </>
                           ) : (
@@ -506,10 +515,10 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
                       </>
                     ) : (
                       <text
-                        x="98"
-                        y="95"
+                        x="72"
+                        y="88"
                         fontFamily="Inter, sans-serif"
-                        fontSize="28"
+                        fontSize="24"
                         fill="#475569"
                         textAnchor="middle"
                       >
