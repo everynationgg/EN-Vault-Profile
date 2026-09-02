@@ -26,6 +26,13 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
     const cardFrameAsset = getAssetById(profile.equipped.cardFrameId);
     const avatarFrameAsset = getAssetById(profile.equipped.avatarFrameId);
     const titleAsset = getAssetById(profile.equipped.titleId);
+    const equippedEmblemAsset = getAssetById(profile.equipped.emblemId);
+    const emblemUrl = equippedEmblemAsset?.asset_url || activeMilestone.assetUrl;
+    const emblemColor =
+      profile.equipped.emblemColor ||
+      (equippedEmblemAsset?.metadata?.color as string) ||
+      activeMilestone.color;
+
     const titleText =
       (titleAsset?.metadata?.title_text as string) || titleAsset?.name || "VAULT SEEKER";
 
@@ -185,13 +192,13 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
                 clipPath="url(#avatarClip)"
               />
 
-              {/* Equipped Ornate Avatar Frame (with 4 stars & bottom jewel) */}
+              {/* Equipped Ornate Avatar Frame */}
               <image
                 href={avatarFrameAsset?.asset_url || "/assets/frames/avatar_vault_seeker.svg"}
-                x="80"
-                y="90"
-                width="320"
-                height="320"
+                x={avatarFrameAsset?.id === "frame_avatar_mystic_cat" ? "50" : "80"}
+                y={avatarFrameAsset?.id === "frame_avatar_mystic_cat" ? "65" : "90"}
+                width={avatarFrameAsset?.id === "frame_avatar_mystic_cat" ? "380" : "320"}
+                height={avatarFrameAsset?.id === "frame_avatar_mystic_cat" ? "380" : "320"}
                 preserveAspectRatio="xMidYMid meet"
               />
             </g>
@@ -245,24 +252,38 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
             {/* ==============================================================
                 4. ORNATE TITLE FRAME BANNER PLAQUE
                 ============================================================== */}
-            <g id="zone-title" transform="translate(435, 212)">
-              {/* Beveled Plaque SVG Frame */}
+            <g
+              id="zone-title"
+              transform={
+                titleAsset?.id === "title_mystic_cat"
+                  ? "translate(400, 195)"
+                  : "translate(435, 212)"
+              }
+            >
+              {/* Beveled Plaque Frame */}
               <image
-                href="/assets/titles/title_vault_seeker_banner.svg"
+                href={
+                  titleAsset?.asset_url ||
+                  "/assets/titles/title_vault_seeker_banner.svg"
+                }
                 x="0"
                 y="0"
-                width="540"
-                height="76"
-                preserveAspectRatio="none"
+                width={titleAsset?.id === "title_mystic_cat" ? "520" : "540"}
+                height={titleAsset?.id === "title_mystic_cat" ? "150" : "76"}
+                preserveAspectRatio={
+                  titleAsset?.id === "title_mystic_cat"
+                    ? "xMidYMid meet"
+                    : "none"
+                }
               />
 
               {/* Title Text */}
               <text
-                x="270"
-                y="46"
+                x={titleAsset?.id === "title_mystic_cat" ? "260" : "270"}
+                y={titleAsset?.id === "title_mystic_cat" ? "82" : "46"}
                 fontFamily="Cinzel, serif"
                 fontWeight="700"
-                fontSize="24"
+                fontSize={titleAsset?.id === "title_mystic_cat" ? "22" : "24"}
                 fill={profile.equipped.titleColor || "#FFFFFF"}
                 letterSpacing="4"
                 textAnchor="middle"
@@ -283,21 +304,21 @@ export const ProfileCardCanvas = forwardRef<ProfileCardCanvasRef, ProfileCardCan
                 cx="65"
                 cy="75"
                 r="70"
-                fill={profile.equipped.emblemColor || activeMilestone.color}
+                fill={emblemColor}
                 opacity="0.2"
                 filter="url(#emblemGlow)"
               />
 
               {/* 3D Milestone Crest */}
               <image
-                href={activeMilestone.assetUrl}
+                href={emblemUrl}
                 x="0"
                 y="0"
                 width="130"
                 height="145"
                 preserveAspectRatio="xMidYMid meet"
                 style={{
-                  filter: `drop-shadow(0 0 18px ${profile.equipped.emblemColor || activeMilestone.color})`,
+                  filter: `drop-shadow(0 0 18px ${emblemColor})`,
                 }}
               />
             </g>

@@ -9,6 +9,19 @@ export const ASSET_CATALOG: ProfileAsset[] = [
   // 1. AVATAR FRAMES
   // ------------------------------------------------------------------
   {
+    id: "frame_avatar_mystic_cat",
+    category: "avatar_frame",
+    name: "Mystic Witch Cat Frame",
+    description: "Enchanted wizard hat, ears, hanging lantern, and black cat familiar.",
+    asset_url: "/assets/themes/mystic_cat/mystic_cat_-_avatar_frame.png",
+    preview_url: "/assets/themes/mystic_cat/mystic_cat_-_avatar_frame.png",
+    unlock_type: "starter",
+    unlock_req: {},
+    is_starter: true,
+    rarity: "mythic",
+    metadata: { theme: "mystic_cat" },
+  },
+  {
     id: "frame_avatar_vault_seeker",
     category: "avatar_frame",
     name: "Violet Seeker Crest",
@@ -91,6 +104,19 @@ export const ASSET_CATALOG: ProfileAsset[] = [
   // 2. CARD FRAMES (1200 x 675 px outer borders)
   // ------------------------------------------------------------------
   {
+    id: "frame_card_mystic_cat",
+    category: "card_frame",
+    name: "Mystic Witch Cat Card Frame",
+    description: "Ornate gold & violet border with crystal broomstick, spellbooks, and familiar cat.",
+    asset_url: "/assets/themes/mystic_cat/mystic_cat_-_profile_frame.png",
+    preview_url: "/assets/themes/mystic_cat/mystic_cat_-_profile_frame.png",
+    unlock_type: "starter",
+    unlock_req: {},
+    is_starter: true,
+    rarity: "mythic",
+    metadata: { theme: "mystic_cat" },
+  },
+  {
     id: "frame_card_vault_legendary",
     category: "card_frame",
     name: "Vault Sovereign Ornate Frame",
@@ -159,6 +185,19 @@ export const ASSET_CATALOG: ProfileAsset[] = [
   // ------------------------------------------------------------------
   // 3. BACKGROUND THEMES
   // ------------------------------------------------------------------
+  {
+    id: "theme_mystic_cat_bg",
+    category: "theme_layer",
+    name: "Mystic Moonlit Castle",
+    description: "Gothic moonlit castle with witch cats on brooms and magical violet mist.",
+    asset_url: "/assets/themes/mystic_cat/mystic_cat_profile_background.png",
+    preview_url: "/assets/themes/mystic_cat/mystic_cat_profile_background.png",
+    unlock_type: "starter",
+    unlock_req: {},
+    is_starter: true,
+    rarity: "mythic",
+    metadata: { slot: "base", theme: "mystic_cat" },
+  },
   {
     id: "bg_violet_storm",
     category: "theme_layer",
@@ -229,6 +268,19 @@ export const ASSET_CATALOG: ProfileAsset[] = [
   // 4. TITLES
   // ------------------------------------------------------------------
   {
+    id: "title_mystic_cat",
+    category: "title",
+    name: "Mystic Vault Seeker",
+    description: "Enchanted parchment scroll with peeking tabby cat familiar.",
+    asset_url: "/assets/themes/mystic_cat/mystic_cat_achievement_title_frame.png",
+    preview_url: "/assets/themes/mystic_cat/mystic_cat_achievement_title_frame.png",
+    unlock_type: "starter",
+    unlock_req: {},
+    is_starter: true,
+    rarity: "mythic",
+    metadata: { title_text: "VAULT SEEKER", color: "#FDE68A", theme: "mystic_cat" },
+  },
+  {
     id: "title_vault_seeker",
     category: "title",
     name: "Vault Seeker",
@@ -297,6 +349,19 @@ export const ASSET_CATALOG: ProfileAsset[] = [
   // ------------------------------------------------------------------
   // 5. MAIN MILESTONE EMBLEMS
   // ------------------------------------------------------------------
+  {
+    id: "emblem_mystic_cat",
+    category: "emblem",
+    name: "Mystic Maine Coon Crest",
+    description: "Circle of 9 fantasy wizard cats honoring legendary guild titanship.",
+    asset_url: "/assets/themes/mystic_cat/mystic_cat_-_emblem.png",
+    preview_url: "/assets/themes/mystic_cat/mystic_cat_-_emblem.png",
+    unlock_type: "starter",
+    unlock_req: {},
+    is_starter: true,
+    rarity: "mythic",
+    metadata: { milestone_level: 40, color: "#C084FC", theme: "mystic_cat" },
+  },
   {
     id: "emblem_starter_silver",
     category: "emblem",
@@ -377,9 +442,21 @@ export const ASSET_CATALOG: ProfileAsset[] = [
   },
 
   // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
   // 6. ACHIEVEMENT SHOWCASE BADGES (5 Canonical Showcase Slots)
   // ------------------------------------------------------------------
+  {
+    id: "badge_mystic_cat_paw",
+    category: "badge",
+    name: "CRYSTAL PAW",
+    description: "Honoring ancient mystical cat guardians",
+    asset_url: "/assets/themes/mystic_cat/mystic_cat_-_achievement_badge.png",
+    preview_url: "/assets/themes/mystic_cat/mystic_cat_-_achievement_badge.png",
+    unlock_type: "starter",
+    unlock_req: {},
+    is_starter: true,
+    rarity: "mythic",
+    metadata: { color: "#FDE68A", theme: "mystic_cat" },
+  },
   {
     id: "badge_early_bird",
     category: "badge",
@@ -579,6 +656,54 @@ export const STARTER_IDENTITIES = {
 
 export const DEMO_PROFILES: Record<string, UserProfileState> = {
   veteran: DEFAULT_EN_PROFILE,
+  mystic_cat: {
+    ...DEFAULT_EN_PROFILE,
+    userId: "889977665544332211",
+    discordUsername: "EnGG#1234",
+    discordDisplayName: "EnGG ✨",
+    profileLevel: 42,
+    profileExp: 18750,
+    vaultCoins: 2450,
+    equipped: {
+      nameFont: "Cinzel",
+      nameColor: "#FFFFFF",
+      titleId: "title_mystic_cat",
+      titleColor: "#FDE68A",
+      emblemId: "emblem_mystic_cat",
+      emblemColor: "#C084FC",
+      avatarFrameId: "frame_avatar_mystic_cat",
+      cardFrameId: "frame_card_mystic_cat",
+      themeLayers: ["theme_mystic_cat_bg"],
+      coinColor: "#F59E0B",
+      achievementSlots: [
+        "badge_mystic_cat_paw",
+        "badge_early_bird",
+        "badge_voice_chatter",
+        "badge_trivia_master",
+        "badge_boss_slayer_v2",
+      ],
+    },
+    unlockedAssetIds: [
+      "frame_avatar_mystic_cat",
+      "frame_card_mystic_cat",
+      "theme_mystic_cat_bg",
+      "title_mystic_cat",
+      "emblem_mystic_cat",
+      "badge_mystic_cat_paw",
+      "frame_avatar_vault_seeker",
+      "frame_card_vault_legendary",
+      "bg_violet_storm",
+      "title_vault_seeker",
+      "emblem_starter_silver",
+      "emblem_milestone_20",
+      "emblem_milestone_40",
+      "badge_early_bird",
+      "badge_voice_chatter",
+      "badge_trivia_master",
+      "badge_boss_slayer_v2",
+      "badge_community_pillar",
+    ],
+  },
   raider_violet: {
     ...DEFAULT_EN_PROFILE,
     userId: "782345678901234567",
@@ -598,5 +723,6 @@ export const DEMO_PROFILES: Record<string, UserProfileState> = {
     vaultCoins: 99999,
   },
 };
+
 
 

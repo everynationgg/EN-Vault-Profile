@@ -297,6 +297,25 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               <button
                 type="button"
                 onClick={() => {
+                  onSwitchDemoProfile("mystic_cat");
+                  setIsDropdownOpen(false);
+                }}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  padding: "6px 12px",
+                  fontSize: "0.8rem",
+                  border: "none",
+                  color: "#FDE68A",
+                  fontWeight: "bold",
+                }}
+              >
+                🐾 Mystic Cat (Fantasy Theme)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
                   onSwitchDemoProfile("veteran");
                   setIsDropdownOpen(false);
                 }}
@@ -309,7 +328,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
                   border: "none",
                 }}
               >
-                EnGG (Lv 42)
+                EnGG (Default Theme)
               </button>
               <button
                 type="button"
