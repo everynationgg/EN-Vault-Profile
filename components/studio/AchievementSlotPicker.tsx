@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { getAssetById, getAssetsByCategory } from "@/lib/assetsCatalog";
-import { Check, Trophy, Lock } from "lucide-react";
+import { Check, Trophy } from "lucide-react";
 import { ProfileAsset } from "@/lib/types";
 
 interface AchievementSlotPickerProps {
@@ -170,8 +170,7 @@ export const AchievementSlotPicker: React.FC<AchievementSlotPickerProps> = ({
               <button
                 key={badge.id}
                 type="button"
-                onClick={() => isUnlocked && handleEquipBadgeToSlot(badge.id)}
-                disabled={!isUnlocked}
+                onClick={() => handleEquipBadgeToSlot(badge.id)}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -180,17 +179,13 @@ export const AchievementSlotPicker: React.FC<AchievementSlotPickerProps> = ({
                   borderRadius: "10px",
                   background: isEquippedInThisSlot
                     ? "rgba(56, 189, 248, 0.15)"
-                    : isUnlocked
-                    ? "rgba(15, 23, 42, 0.6)"
-                    : "rgba(15, 23, 42, 0.3)",
+                    : "rgba(15, 23, 42, 0.6)",
                   border: isEquippedInThisSlot
                     ? "1.5px solid #38BDF8"
-                    : isUnlocked
-                    ? "1px solid rgba(255, 255, 255, 0.1)"
-                    : "1px solid rgba(255, 255, 255, 0.05)",
-                  cursor: isUnlocked ? "pointer" : "not-allowed",
+                    : "1px solid rgba(255, 255, 255, 0.1)",
+                  cursor: "pointer",
                   textAlign: "left",
-                  opacity: isUnlocked ? 1 : 0.5,
+                  opacity: 1,
                   transition: "all 0.18s ease",
                 }}
               >
@@ -202,24 +197,9 @@ export const AchievementSlotPicker: React.FC<AchievementSlotPickerProps> = ({
                       width: "42px",
                       height: "42px",
                       objectFit: "contain",
-                      filter: isUnlocked ? "none" : "grayscale(80%)",
+                      filter: "none",
                     }}
                   />
-                  {!isUnlocked && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        background: "rgba(0, 0, 0, 0.6)",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <Lock size={16} color="#94A3B8" />
-                    </div>
-                  )}
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>

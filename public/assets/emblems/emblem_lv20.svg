@@ -1,26 +1,12 @@
-<svg width="200" height="220" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
   <defs>
-    <radialGradient id="crestGlow_Vanguard" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.8"/>
-      <stop offset="100%" stopColor="#F59E0B" stopOpacity="0"/>
-    </radialGradient>
-    <linearGradient id="crestGold_Vanguard" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#FDE68A"/>
-      <stop offset="50%" stopColor="#D97706"/>
-      <stop offset="100%" stopColor="#78350F"/>
+    <linearGradient id="emb20" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
     </linearGradient>
   </defs>
-  
-  <circle cx="100" cy="110" r="85" fill="url(#crestGlow_Vanguard)" opacity="0.3"/>
-
-  <!-- Outer Wings -->
-  <path d="M100 20 L150 70 L180 130 L150 170 L100 200 L50 170 L20 130 L50 70 Z" fill="#0A0614" stroke="url(#crestGold_Vanguard)" stroke-width="4"/>
-  
-  <!-- Faceted Gem Shape -->
-  <polygon points="100,45 155,95 135,160 100,185 65,160 45,95" fill="#F59E0B" fill-opacity="0.25" stroke="#F59E0B" stroke-width="3"/>
-  <polygon points="100,55 140,100 100,170 60,100" fill="#F59E0B" fill-opacity="0.5" stroke="#FFFFFF" stroke-width="1.5"/>
-
-  <!-- Inner Diamond -->
-  <polygon points="100,75 125,110 100,145 75,110" fill="#FFFFFF" fill-opacity="0.9"/>
-  <circle cx="100" cy="110" r="10" fill="#F59E0B"/>
+  <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" stroke="url(#emb20)" stroke-width="4.5" fill="#1C1917"/>
+  <!-- Iron Vanguard Blades -->
+  <path d="M50 20 L68 50 L50 42 L32 50 Z" fill="url(#emb20)"/>
+  <text x="50" y="74" font-family="Rajdhani, sans-serif" font-weight="800" font-size="18" fill="#F59E0B" text-anchor="middle">20</text>
 </svg>

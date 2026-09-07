@@ -195,7 +195,9 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               color: "#F59E0B",
             }}
           >
-            {profile.vaultCoins.toLocaleString()}
+            {profile.vaultCoins >= 1000
+              ? `${(profile.vaultCoins / 1000).toFixed(1).replace(/\.0$/, "")}K`
+              : profile.vaultCoins.toLocaleString()}
           </span>
         </div>
 
@@ -213,6 +215,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               borderRadius: "9999px",
               padding: "4px 12px 4px 4px",
               cursor: "pointer",
+              transition: "all 0.2s ease",
             }}
           >
             <img
@@ -223,16 +226,18 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
                 height: "28px",
                 borderRadius: "50%",
                 objectFit: "cover",
+                border: "1.5px solid #8B5CF6",
               }}
             />
             <span
               style={{
                 fontSize: "0.85rem",
-                fontWeight: 600,
+                fontWeight: 800,
+                letterSpacing: "0.5px",
                 color: "#F8FAFC",
               }}
             >
-              {profile.discordUsername || "EnGG#1234"}
+              CLAIM
             </span>
             <ChevronDown size={14} color="#94A3B8" />
           </button>
@@ -297,7 +302,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  onSwitchDemoProfile("mystic_cat");
+                  onSwitchDemoProfile("where_winds_meet");
                   setIsDropdownOpen(false);
                 }}
                 className="btn-secondary"
@@ -307,11 +312,30 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
                   padding: "6px 12px",
                   fontSize: "0.8rem",
                   border: "none",
-                  color: "#FDE68A",
+                  color: "#C084FC",
                   fontWeight: "bold",
                 }}
               >
-                🐾 Mystic Cat (Fantasy Theme)
+                🌪️ Where Winds Meet (Storm Lion)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  onSwitchDemoProfile("palworld");
+                  setIsDropdownOpen(false);
+                }}
+                className="btn-secondary"
+                style={{
+                  width: "100%",
+                  justifyContent: "flex-start",
+                  padding: "6px 12px",
+                  fontSize: "0.8rem",
+                  border: "none",
+                  color: "#FACC15",
+                  fontWeight: "bold",
+                }}
+              >
+                🐾 Palworld (Palong-palord)
               </button>
               <button
                 type="button"

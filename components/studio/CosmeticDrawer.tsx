@@ -25,7 +25,6 @@ import {
   Layers,
   Coins,
   Square,
-  Lock,
   Check,
   Zap,
   Flame,
@@ -330,21 +329,6 @@ export const CosmeticDrawer: React.FC<CosmeticDrawerProps> = ({
                             objectFit: "contain",
                           }}
                         />
-                        {!isUnlocked && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              inset: 0,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              background: "rgba(0,0,0,0.6)",
-                              borderRadius: "50%",
-                            }}
-                          >
-                            <Lock size={16} color="#94A3B8" />
-                          </div>
-                        )}
                       </div>
                       <div style={{ flex: 1 }}>
                         <div
@@ -466,11 +450,9 @@ export const CosmeticDrawer: React.FC<CosmeticDrawerProps> = ({
                         >
                           {item.name}
                         </span>
-                        {isEquipped ? (
+                        {isEquipped && (
                           <Check size={16} color="#38BDF8" strokeWidth={3} />
-                        ) : !isUnlocked ? (
-                          <Lock size={14} color="#94A3B8" />
-                        ) : null}
+                        )}
                       </div>
                       <div
                         style={{
@@ -649,11 +631,9 @@ export const CosmeticDrawer: React.FC<CosmeticDrawerProps> = ({
                       >
                         {item.name}
                       </span>
-                      {isEquipped ? (
+                      {isEquipped && (
                         <Check size={16} color="#38BDF8" strokeWidth={3} />
-                      ) : !isUnlocked ? (
-                        <Lock size={14} color="#94A3B8" />
-                      ) : null}
+                      )}
                     </div>
                     <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>
                       {item.description}

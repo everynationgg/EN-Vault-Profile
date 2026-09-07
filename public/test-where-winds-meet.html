@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Where Winds Meet — New 3-Asset Canvas</title>
+  <style>
+    body {
+      background: #06050b;
+      margin: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      font-family: system-ui, sans-serif;
+      color: #fff;
+    }
+    .card-container {
+      position: relative;
+      width: 1200px;
+      height: 675px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(168, 85, 247, 0.3);
+    }
+    
+    /* 1. Combined Background + Frame */
+    .bg-frame {
+      position: absolute;
+      inset: 0;
+      width: 1200px;
+      height: 675px;
+      object-fit: cover;
+    }
+
+    /* 2. Avatar Photo clipped to circular aperture: cx = 288, cy = 295, r = 88 */
+    .avatar-photo {
+      position: absolute;
+      left: 200px;
+      top: 207px;
+      width: 176px;
+      height: 176px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    }
+
+    /* 3. Avatar Frame (1:1 Full 1200x675 Overlay) */
+    .avatar-frame {
+      position: absolute;
+      inset: 0;
+      width: 1200px;
+      height: 675px;
+      pointer-events: none;
+    }
+
+    /* 4. Identity under Avatar (Centered at x = 288px) */
+    .identity-block {
+      position: absolute;
+      left: 288px;
+      top: 462px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .identity-name {
+      font-family: "Cinzel", "Rajdhani", serif;
+      font-size: 38px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 2px 6px rgba(0,0,0,0.9);
+      line-height: 1.1;
+    }
+    .identity-tag {
+      font-family: monospace;
+      font-size: 15px;
+      font-weight: bold;
+      color: #C084FC;
+      letter-spacing: 1.5px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+    .identity-level {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #E2E8F0;
+      letter-spacing: 2.5px;
+      text-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
+      margin-top: 2px;
+    }
+
+    /* 5. Title Banner (1:1 Full 1200x675 Overlay) */
+    .title-frame {
+      position: absolute;
+      inset: 0;
+      width: 1200px;
+      height: 675px;
+      pointer-events: none;
+    }
+
+    /* 6. Vault Coins (Top Right) */
+    .coins-block {
+      position: absolute;
+      left: 955px;
+      top: 101px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .coins-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1;
+    }
+    .coins-number {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: #DDD6FE;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(192, 132, 252, 0.8);
+    }
+    .coins-label {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #A78BFA;
+      letter-spacing: 2px;
+      margin-top: 2px;
+    }
+    .coin-icon {
+      width: 76px;
+      height: 73px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(192, 132, 252, 0.8));
+    }
+
+    /* 7. 5 Achievements Row (Bottom Right) */
+    .achievements-row {
+      position: absolute;
+      left: 472px;
+      top: 457px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .achievement-item {
+      width: 102px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+    }
+    .achievement-icon {
+      width: 102px;
+      height: 98px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.6));
+    }
+    .achievement-name {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #DDD6FE;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+  <h2>Where Winds Meet — Clean 3-Asset Canvas Composition</h2>
+  <div class="card-container">
+    <!-- Layer 1: Frame (Combined Background + Outer Frame) -->
+    <img class="bg-frame" src="/assets/themes/where_winds_meet/where_winds_meet_profile_background.jpg" />
+    
+    <!-- Layer 2: Avatar Photo -->
+    <img class="avatar-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" />
+    
+    <!-- Layer 3: Avatar Frame (Full 1200x675) -->
+    <img class="avatar-frame" src="/assets/themes/where_winds_meet/where_winds_meet_avatar_frame.png" />
+    
+    <!-- Layer 4: Identity (Name, Discord #, Level under Avatar) -->
+    <div class="identity-block">
+      <div class="identity-name">燕云十六声</div>
+      <div class="identity-tag">WindsMeet #0001</div>
+      <div class="identity-level">LEVEL 99</div>
+    </div>
+    
+    <!-- Layer 5: Title Frame (Full 1200x675) -->
+    <img class="title-frame" src="/assets/themes/where_winds_meet/where_winds_meet_title_frame.png" />
+    
+    <!-- Layer 6: Coins (Top Right) -->
+    <div class="coins-block">
+      <div class="coins-text-col">
+        <span class="coins-number">9,999</span>
+        <span class="coins-label">COINS</span>
+      </div>
+      <img class="coin-icon" src="/assets/branding/en_vault_medallion.png" />
+    </div>
+
+    <!-- Layer 7: 5 Achievements (Lower Right) -->
+    <div class="achievements-row">
+      <div class="achievement-item">
+        <img class="achievement-icon" src="/assets/themes/where_winds_meet/where_winds_meet_achievement_badge.png" />
+        <span class="achievement-name">ACHIEVEMENT</span>
+      </div>
+      <div class="achievement-item">
+        <img class="achievement-icon" src="/assets/themes/where_winds_meet/where_winds_meet_achievement_badge.png" />
+        <span class="achievement-name">ACHIEVEMENT</span>
+      </div>
+      <div class="achievement-item">
+        <img class="achievement-icon" src="/assets/themes/where_winds_meet/where_winds_meet_achievement_badge.png" />
+        <span class="achievement-name">ACHIEVEMENT</span>
+      </div>
+      <div class="achievement-item">
+        <img class="achievement-icon" src="/assets/themes/where_winds_meet/where_winds_meet_achievement_badge.png" />
+        <span class="achievement-name">ACHIEVEMENT</span>
+      </div>
+      <div class="achievement-item">
+        <img class="achievement-icon" src="/assets/themes/where_winds_meet/where_winds_meet_achievement_badge.png" />
+        <span class="achievement-name">ACHIEVEMENT</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
